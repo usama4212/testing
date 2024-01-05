@@ -11,6 +11,7 @@ const AuthLayout = ({
   submitHandler,
   buttonText,
 }: AuthLayoutProps) => {
+
   return (
     <div className=" min-h-screen w-full flex">
       <div className="md:w-[50%] bg-primary min-h-screen flex items-center justify-center backdrop-blur-xl">
@@ -28,6 +29,7 @@ const AuthLayout = ({
           </div>
         </div>
       </div>
+
       <div
         className={`md:w-[50%]  min-h-screen flex items-center justify-center  bg-no-repeat bg-cover  `}
         style={{ backgroundImage: `url(${bg.src}) ` }}
@@ -45,6 +47,7 @@ const AuthLayout = ({
             type="submit"
             value={buttonText}
           />
+
           {buttonText == "Create Account" && (
             <div className="mt-5 flex justify-center text-[15px] font-medium">
               Already Have An Account?
