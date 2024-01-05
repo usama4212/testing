@@ -18,7 +18,7 @@ import { emailRegex, numberRegex, passwordRegexer, regexError, specialCharacterR
 
 const signupPage = () => {
 
-  const [formData, setFormData] = useState({ userName: '', email: '', phone: '', password: '', confirmPassword: '' });
+  const [formData, setFormData] = useState({userName: '', email: '', phone: '', password: '', confirmPassword: ''});
   const [formDataError, setFormDataError] = useState<any>({})
   const [passwordRegex, setPasswordRegex] = useState("");
   const [showPassword1, setShowPassword1] = useState(false)
@@ -31,9 +31,7 @@ const signupPage = () => {
     setFormDataError((pre: any) => ({ ...pre, [name]: "" }));
 
     if (name == "email") {
-      if (!emailRegex.test(value) && value.length !== 0) {
-        setFormDataError((pre: any) => ({ ...pre, regex: regexError }));
-      }
+      if (!emailRegex.test(value) && value.length !== 0) setFormDataError((pre: any) => ({ ...pre, regex: regexError }))
       else setFormDataError((pre: any) => ({ ...pre, regex: "" }));
     }
 

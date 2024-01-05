@@ -4,12 +4,12 @@ import AuthLayout from "@/components/Auth/AuthLayout";
 import phone from "@/assets/phone.svg";
 import moment from "moment";
 
-const NumberOtp = () => {
+const NumberOtp = ({submitHandler} : any) => {
     const [code, setCode] = useState(['', '', '', '']);
     const [counter, setCounter] = useState<any>(120);
     const inputRefs = useRef<any>([]);
 
-    const submitHandler = () => { };
+    // const submitHandler = () => { };
 
 
     const handleChange = (index: any, value: any) => {

@@ -4,12 +4,12 @@ import AuthLayout from "@/components/Auth/AuthLayout";
 import envelope from "@/assets/envelope.svg";
 import moment from "moment";
 
-const EmailOtp = () => {
+const EmailOtp = ({submitHandler} : any) => {
     const [code, setCode] = useState(['', '', '', '']);
     const [counter, setCounter] = useState<any>(120);
     const inputRefs = useRef<any>([]);
 
-    const submitHandler = () => { };
+    // const submitHandler = () => { };
 
 
     const handleChange = (index: any, value: any) => {
