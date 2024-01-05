@@ -6,6 +6,7 @@ const Button = ({ icon, clickHandler, buttonText , style}: ButtonProps) => {
     <>
       <div className="relative flex  justify-center  ">
         <button
+        type="button"
           onClick={clickHandler}
           className=" focus:border-gray-400 focus:border  focus:outline-none  py-4  w-full    rounded-[10px] border-[0.2px] text-sm font-medium"
        style={style}
@@ -21,7 +22,7 @@ const Button = ({ icon, clickHandler, buttonText , style}: ButtonProps) => {
 interface ButtonProps {
   icon: StaticImageData;
   style:object;
-  clickHandler: () => void;
+  clickHandler: (e:any) => void;
   buttonText: string;
 }
 export default Button;

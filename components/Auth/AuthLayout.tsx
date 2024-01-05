@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from "next/image";
 import React, { ReactNode } from "react";
 import bg from "/assets/bg2.svg";
+import Link from "next/link";
 
 const AuthLayout = ({
   title,
@@ -11,7 +12,7 @@ const AuthLayout = ({
   buttonText,
 }: AuthLayoutProps) => {
   return (
-    <div className=" min-h-screen   w-full flex ">
+    <div className=" min-h-screen w-full flex">
       <div className="md:w-[50%] bg-primary min-h-screen flex items-center justify-center backdrop-blur-xl">
         <div className=" justify-center">
           <div className="flex justify-center">
@@ -28,14 +29,15 @@ const AuthLayout = ({
         </div>
       </div>
       <div
-        className={`md:w-[50%]  min-h-screen  flex items-center justify-center  bg-no-repeat bg-cover   `}
-        style={{ backgroundImage: `url(${bg.src}) `}}
+        className={`md:w-[50%]  min-h-screen flex items-center justify-center  bg-no-repeat bg-cover  `}
+        style={{ backgroundImage: `url(${bg.src}) ` }}
       >
         <form
           onSubmit={(e: any) => {
             e.preventDefault();
+            submitHandler();
           }}
-          className="md: w-1/2"
+          className="lg:w-1/2 mx-auto p-4"
         >
           {children}
           <input
@@ -43,11 +45,29 @@ const AuthLayout = ({
             type="submit"
             value={buttonText}
           />
+          {buttonText == "Create Account" && (
+            <div className="mt-5 flex justify-center text-[15px] font-medium">
+              Already Have An Account?
+              <span className="text-primary ml-2 cursor-pointer">
+                <Link href="/login">Sign In</Link>
+              </span>
+            </div>
+          )}
+          {buttonText == "Sign in" && (
+            <div className="mt-5 flex justify-center text-[15px] font-medium">
+              {/* eslint-disable-next-line react/no-unescaped-entities */}
+              Don't Have An Account?.
+              <span className="text-primary ml-2 cursor-pointer">
+                <Link href="/signup">Sign Up</Link>
+              </span>
+            </div>
+          )}
         </form>
       </div>
     </div>
   );
 };
+
 interface AuthLayoutProps {
   title: string;
   subtitle: string;
@@ -56,4 +76,5 @@ interface AuthLayoutProps {
   submitHandler: () => void;
   buttonText: string;
 }
+
 export default AuthLayout;
