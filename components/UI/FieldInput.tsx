@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Image from "next/image";
 
-const Input = ({ DefaultImage, activeImage, type, placeholder, name, onChange, onClick, icon, formData,  }: any) => {
+const Input = ({ DefaultImage, activeImage, type, placeholder, name, onChange, onClick, icon, formData, value }: any) => {
 
     const [isFocused, setIsFocused] = useState(false);
 
@@ -20,6 +20,7 @@ const Input = ({ DefaultImage, activeImage, type, placeholder, name, onChange, o
                 <input
                     type={type}
                     name={name}
+                    value={value}
                     className=" focus:border-gray-400 focus:border focus:outline-none  p-4 ps-10 w-full  bg-white  rounded-[10px] border-[0.2px] "
                     placeholder={placeholder}
                     onChange={onChange}
@@ -27,8 +28,8 @@ const Input = ({ DefaultImage, activeImage, type, placeholder, name, onChange, o
                     onBlur={handleBlur}
                     autoComplete="off"
                 />
-                {(name == "password" && formData.password !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image'/></span>}
-                {(name == "confirmPassword" && formData.confirmPassword !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image' /></span>}
+                {(name == "password" && formData?.password !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image'/></span>}
+                {(name == "confirmPassword" && formData?.confirmPassword !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image' /></span>}
             </div>
         </div>
     )

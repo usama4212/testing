@@ -7,65 +7,54 @@ import activeEmail from "@/assets/activeEmail.svg";
 import defaultPhone from "@/assets/defaultPhone.svg";
 import activePhone from "@/assets/activePhone.svg";
 import Input from "@/components/UI/FieldInput";
-import { emailRegex } from "@/components/Constants";
+import { emailRegex, phoneNumberRegex } from "@/components/Constants";
 
 const ForgetPassword = ({ setPage }: any) => {
-    const [phone, setPhone] = useState("");
-    const [email, setEmail] = useState("")
-    const [errorMessage, setErrorMessage] = useState("");
-    const [emailError, setEmailError] = useState("")
-    const [emailOrPhoneError, setEmailOrPhoneError] = useState("")
-    const [isPhoneShow, setIsPhoneShow] = useState(true)
-    const [isEmailShow, setIsEmailShow] = useState(true)
+    const [userInfo, setUserInfo] = useState({
+        phone: "",
+        email: "",
+        errorMessage: "",
+        emailError: "",
+        emailOrPhoneError: "",
+        isPhoneShow: true,
+        isEmailShow: true,
+    });
+    
 
-    const submitHandler = () => {
 
-        if (!isPhoneShow) setPage("email")
 
-        if (!isEmailShow) setPage("number")
-
-        if (phone == "" || email == "") setEmailOrPhoneError("Please Enter Phone Or Email")
-        else setEmailOrPhoneError("")
-
-    }
-    const handlePhoneChange = (e: any) => {
+    const handleChange = (e: any) => {
         const { name, value } = e.target;
-        setEmailOrPhoneError("")
-        if (value.length > 0) {
-            setIsEmailShow(false)
-        }
-        else {
-            setIsEmailShow(true)
-        }
+
+        setUserInfo((pre) => ({...pre, emailError: "", errorMessage: "", emailOrPhoneError: "", [name]: value}))
 
         if (name === "phone") {
-            const phoneNumberRegex = /^[+0-9][0-9]*$/;
-            if (!phoneNumberRegex.test(value) && value.length > 0) {
-                setErrorMessage("Invalid Phone Number");
-            } else {
-                setErrorMessage("");
-            }
-            setPhone(value);
+            setUserInfo((prevUserInfo) => ({
+                ...prevUserInfo,
+                isEmailShow: value.length > 0 ? false : true,
+                errorMessage: !phoneNumberRegex.test(value) && value.length > 0 ? "Invalid Phone Number" : "",
+            }));
         }
-    };
-
-    const handleEmailChange = (e: any) => {
-        setEmailOrPhoneError("")
-        const { name, value } = e.target;
-
-        if (value.length > 0) setIsPhoneShow(false)
-        else setIsPhoneShow(true)
 
         if (name === "email") {
-
-            if (!emailRegex.test(value) && value.length > 0) setEmailError("Please Enter A Valid Email")
-            else setEmailError("")
-
-            setEmail(value);
+            setUserInfo((prevUserInfo) => ({
+                ...prevUserInfo,
+                isPhoneShow: value.length > 0 ? false : true,
+                emailError: !emailRegex.test(value) && value.length > 0 ? "Please Enter A Valid Email" : "",
+            }));
         }
     };
 
+    const submitHandler = () => {
+        if (!userInfo.isPhoneShow) setPage("email");
+        if (!userInfo.isEmailShow) setPage("number");
 
+        if (userInfo.phone === "" || userInfo.email === "") {
+            setUserInfo((prevUserInfo) => ({ ...prevUserInfo, emailOrPhoneError: "Please Enter Phone Or Email" }));
+        } else {
+            setUserInfo((prevUserInfo) => ({ ...prevUserInfo, emailOrPhoneError: "" }));
+        }
+    };
 
     return (
         <>
@@ -77,36 +66,44 @@ const ForgetPassword = ({ setPage }: any) => {
                 buttonText="Continue"
             >
                 <div className="w-full max-h-[574px] flex-col justify-start items-start gap-5 inline-flex">
-                    <div className="text-black text-4xl font-semibold  leading-[48px]">
-                        Forget Password{" "}
-                    </div>
+                    <div className="text-black text-4xl font-semibold leading-[48px]">Forget Password </div>
                     <div>Choose how you want to reset password</div>
                     <div className="px-px py-[15px] w-full mb-3">
-                        {isEmailShow &&
+                        {userInfo.isEmailShow && (
                             <div>
-                                <Input DefaultImage={defaultEmail} activeImage={activeEmail} type="email" name="email" placeholder="Email address" onChange={handleEmailChange} />
-                                <span className="text-red-500 text-sm px-4 ">{emailError}</span>
+                                <Input
+                                    DefaultImage={defaultEmail}
+                                    activeImage={activeEmail}
+                                    type="email"
+                                    name="email"
+                                    placeholder="Email address"
+                                    onChange={handleChange}
+                                />
+                                <span className="text-red-500 text-sm px-4 ">{userInfo.emailError}</span>
                             </div>
-                        }
+                        )}
 
-
-
-                        {!((!isPhoneShow && isEmailShow) || (isPhoneShow && !isEmailShow)) &&
+                        {!((!userInfo.isPhoneShow && userInfo.isEmailShow) || (userInfo.isPhoneShow && !userInfo.isEmailShow)) && (
                             <div className="flex mb-6">
                                 <div className="w-[45%] border my-3 mr-[11px]"></div>
                                 <div className="text-stone-300">Or</div>
                                 <div className="w-[45%] border my-3 ml-[11px]"></div>
                             </div>
-                        }
+                        )}
 
-                        {isPhoneShow &&
+                        {userInfo.isPhoneShow && (
                             <div>
-                                <Input DefaultImage={defaultPhone} activeImage={activePhone} type="text" name="phone" placeholder="Phone Number" onChange={handlePhoneChange} />
-                                <span className="text-red-500 text-sm px-4 ">{errorMessage}{emailOrPhoneError}</span>
+                                <Input
+                                    DefaultImage={defaultPhone}
+                                    activeImage={activePhone}
+                                    type="text"
+                                    name="phone"
+                                    placeholder="Phone Number"
+                                    onChange={handleChange}
+                                />
+                                <span className="text-red-500 text-sm px-4 ">{userInfo.errorMessage}{userInfo.emailOrPhoneError}</span>
                             </div>
-                        }
-
-
+                        )}
                         <br />
                     </div>
                 </div>

@@ -11,9 +11,13 @@ import activePassword from "@/assets/activePassword.svg";
 const ResetPassword = () => {
     const [formData, setFormData] = useState({ password: '', confirmPassword: '' });
     const [formDataError, setFormDataError] = useState<any>({})
-    const [showPassword1, setShowPassword1] = useState(false)
-    const [showPassword2, setShowPassword2] = useState(false)
+    const [showPasswords, setShowPasswords] = useState({password: false, confirmPassword: false});
     const [passwordMatch, setPasswordMatch] = useState("")
+
+
+    const handleEyeToggle = (passwordKey: keyof typeof showPasswords) => {
+        setShowPasswords((prevState) => ({...prevState, [passwordKey]: !prevState[passwordKey]}));
+      };
 
 
     const handleChange = (e: any) => {
@@ -63,10 +67,14 @@ const ResetPassword = () => {
                     Here’s a tip: Use a combination of Numbers, Uppercase, lowercase and Special characters
                 </div>
 
-                <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPassword1 ? "text" : "password"} placeholder="Password" name="password" formData={formData} onChange={handleChange} onClick={() => setShowPassword1(!showPassword1)} icon={showPassword1 ? eye : eyeSlash} />
+                <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPasswords.password ? 'text' : 'password'} placeholder="Password" name="password" 
+                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('password')} icon={showPasswords.password ? eye : eyeSlash}
+                />
                 <div className="text-red-500 text-sm h-[30px]">{formDataError?.password}</div>
 
-                <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPassword2 ? "text" : "password"} placeholder="Confirm Password" name="confirmPassword" formData={formData} onChange={handleChange} onClick={() => setShowPassword2(!showPassword2)} icon={showPassword2 ? eye : eyeSlash} />
+                <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPasswords.confirmPassword ? 'text' : 'password'} placeholder="Confirm Password" name="confirmPassword" 
+                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('confirmPassword')} icon={showPasswords.confirmPassword ? eye : eyeSlash}
+                />
                 <div className="text-red-500 text-sm h-[30px]">{formDataError?.confirmPassword}{passwordMatch}</div>
             </div>
         </AuthLayout>
