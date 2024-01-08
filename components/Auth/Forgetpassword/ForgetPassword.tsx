@@ -111,5 +111,4 @@ const ForgetPassword = ({ setPage }: any) => {
         </>
     );
 };
-
 export default ForgetPassword;
