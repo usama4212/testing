@@ -20,6 +20,7 @@ import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
 import { useRouter } from "next/navigation";
+import { saudiPhoneNumberRegex } from "@/components/Constants";
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -32,6 +33,8 @@ const LoginPage = () => {
   const [phoneError, setPhoneError] = useState("");
   const [inputsError, setInputsError] = useState("");
   const router = useRouter()
+
+  
   const setValue = (e: any) => {
     const { value, name } = e.target;
     if (name === "phone") {
@@ -58,7 +61,7 @@ const LoginPage = () => {
 
   const submitHandler = () => {
     if (loginOption == "phone") {
-      const saudiPhoneNumberRegex = /^(?:\+?966|00966|0)?\s?5[0-9]{8}$/;
+      
       if (!saudiPhoneNumberRegex.test(phone)) {
         setPhoneError("Please enter a valid phone number.");
         return;

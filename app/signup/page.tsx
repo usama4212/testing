@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import AuthLayout from "@/components/Auth/AuthLayout";
 import signImage from "@/assets/envelope.svg";
 import DefaultName from "@/assets/DefaultName.svg";
@@ -22,18 +22,24 @@ const SignupPage = () => {
   const handleEyeToggle = (passwordKey: keyof typeof showPasswords) => {
     setShowPasswords((prevState) => ({ ...prevState, [passwordKey]: !prevState[passwordKey] }));
   };
+
+
   const handleChange = (e: any) => {
     const { name, value } = e.target;
     setFormData(pre => ({ ...pre, [name]: value }));
     setFormDataError((pre: any) => ({ ...pre, [name]: "" }));
+
     if (name == "email") {
+      
       if (!emailRegex.test(value) && value.length !== 0) setFormDataError((pre: any) => ({ ...pre, regex: regexError }))
       else setFormDataError((pre: any) => ({ ...pre, regex: "" }));
     }
+
     if (name == "phone") {
       if (!saudiPhoneNumberRegex.test(value) && value.length !== 0) setFormDataError((pre: any) => ({ ...pre, phoneRegex: phoneRegexError }))
       else setFormDataError((pre: any) => ({ ...pre, phoneRegex: "" }));
     }
+
     if (name === "password" || name === "confirmPassword") {
       let status = "";
       if (upperCaseRegex.test(value)) status = "Uppercase"
@@ -46,9 +52,14 @@ const SignupPage = () => {
       setPasswordRegex(status)
     }
   };
+
+
   const formDataValidations = () => {
+    
     formDatavalidateCredentials(formData?.userName, formData?.email, formData?.phone, formData?.password, formData?.confirmPassword, setFormDataError);
   };
+
+
   const formDatavalidateCredentials = (userName: any, email: any, phone: any, password: any, confirmPassword: any, setErrors: any) => {
     const fields = ["userName", "email", "phone", "password", "confirmPassword"].map((name) => ({ name, value: eval(name), label: name.charAt(0).toUpperCase() + name.slice(1) }));
     const errors: any = {};
@@ -57,13 +68,21 @@ const SignupPage = () => {
     });
     setErrors(errors);
   };
+
+  
   const submitHandler = () => {
     const formValues = Object.values(formData);
     if (formValues.includes("") || formDataError?.regex !== "" || passwordRegex !== "All satisfied" || formData.password !== formData.confirmPassword) {
       formDataValidations();
-      return;
+      
+    }
+    else{
+      console.log("chlaaaaaaaaagya");
+      
     }
   }
+
+
   const PasswordCheck = ({ condition, text }: any) => (
     <div className="flex">
       <div className={`mt-1 w-3 h-3 sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-3 xl:h-3 rounded-full ${(condition) ? "bg-primary border border-primary" : "bg-white border border-black"}`}></div>
@@ -79,15 +98,15 @@ const SignupPage = () => {
           </div>
           <div className="w-full">
             <FieldInput DefaultImage={DefaultName} activeImage={activeName} type="text" value={formData.userName} placeholder="Name" name="userName" onChange={handleChange} fieldData={formDataError.userName} />
-            {formDataError?.userName && <div className="text-red-600 text-[14px]">{formDataError?.userName?.replace(/([a-z])([A-Z])/g, '$1 $2')}</div>}
+            {formDataError?.userName && <div className="text-red-600 text-[14px] px-2">{formDataError?.userName?.replace(/([a-z])([A-Z])/g, '$1 $2')}</div>}
           </div>
           <div className="w-full">
             <FieldInput DefaultImage={defaultEmail} activeImage={activeEmail} type="text" value={formData.email} placeholder="Email" name="email" onChange={handleChange} fieldData={formDataError.email} />
-            {(formDataError?.email || formDataError?.regex) && <div className="text-red-600 text-[14px]">{formDataError?.email}{formDataError?.regex}</div>}
+            {(formDataError?.email || formDataError?.regex) && <div className="text-red-600 text-[14px] px-2">{formDataError?.email}{formDataError?.regex}</div>}
           </div>
           <div className="w-full">
             <FieldInput DefaultImage={defaultPhone} activeImage={activePhone} type="text" value={formData.phone} placeholder="Phone" name="phone" onChange={handleChange} fieldData={formDataError.phone} />
-            {(formDataError?.phone || formDataError?.phoneRegex) && <div className="text-red-600 text-[14px]">{formDataError?.phone}{formDataError?.phoneRegex}</div>}
+            {(formDataError?.phone || formDataError?.phoneRegex) && <div className="text-red-600 text-[14px] px-2">{formDataError?.phone}{formDataError?.phoneRegex}</div>}
           </div>
           <div className="w-full">
             <FieldInput
@@ -103,7 +122,7 @@ const SignupPage = () => {
               icon={showPasswords.password ? eye : eyeSlash}
               fieldData={formDataError.password}
             />
-            {formDataError?.password && <div className="text-red-600 text-[14px]">{formDataError?.password}</div>}
+            {formDataError?.password && <div className="text-red-600 text-[14px] px-2">{formDataError?.password}</div>}
           </div>
           <div className="w-full">
             <FieldInput
@@ -119,7 +138,7 @@ const SignupPage = () => {
               icon={showPasswords.confirmPassword ? eye : eyeSlash}
               fieldData={formDataError.confirmPassword}
             />
-            {formDataError?.confirmPassword && <div className="text-red-600 text-[14px]">{formDataError?.confirmPassword?.replace(/([a-z])([A-Z])/g, '$1 $2')}</div>}
+            {formDataError?.confirmPassword && <div className="text-red-600 text-[14px] px-2">{formDataError?.confirmPassword?.replace(/([a-z])([A-Z])/g, '$1 $2')}</div>}
           </div>
         </div>
         <div className="mb-16 sm:mb-16 md:mb-16 lg:mb-16 xl:mb-16 2xl:mb-16 mt-5">

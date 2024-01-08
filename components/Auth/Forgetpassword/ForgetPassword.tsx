@@ -7,15 +7,16 @@ import activeEmail from "@/assets/activeEmail.svg";
 import defaultPhone from "@/assets/defaultPhone.svg";
 import activePhone from "@/assets/activePhone.svg";
 import Input from "@/components/UI/FieldInput";
-import { emailRegex, phoneNumberRegex } from "@/components/Constants";
+import { emailRegex, phoneNumberRegex, saudiPhoneNumberRegex } from "@/components/Constants";
 
 const ForgetPassword = ({ setPage }: any) => {
-    const [userInfo, setUserInfo] = useState({
+    const [formData, setFormData] = useState({
         phone: "",
         email: "",
-        errorMessage: "",
+        phoneError: "",
         emailError: "",
-        emailOrPhoneError: "",
+        emptyEmailError: "",
+        emptyPhoneError: "",
         isPhoneShow: true,
         isEmailShow: true,
     });
@@ -26,18 +27,18 @@ const ForgetPassword = ({ setPage }: any) => {
     const handleChange = (e: any) => {
         const { name, value } = e.target;
 
-        setUserInfo((pre) => ({...pre, emailError: "", errorMessage: "", emailOrPhoneError: "", [name]: value}))
+        setFormData((pre) => ({...pre, emailError: "", phoneError: "", emptyEmailError: "", emptyPhoneError : "", [name]: value}))
 
         if (name === "phone") {
-            setUserInfo((prevUserInfo) => ({
+            setFormData((prevUserInfo) => ({
                 ...prevUserInfo,
                 isEmailShow: value.length > 0 ? false : true,
-                errorMessage: !phoneNumberRegex.test(value) && value.length > 0 ? "Invalid Phone Number" : "",
+                phoneError: !saudiPhoneNumberRegex.test(value) && value.length > 0 ? "Please Enter A Valid Phone Number" : "",
             }));
         }
 
         if (name === "email") {
-            setUserInfo((prevUserInfo) => ({
+            setFormData((prevUserInfo) => ({
                 ...prevUserInfo,
                 isPhoneShow: value.length > 0 ? false : true,
                 emailError: !emailRegex.test(value) && value.length > 0 ? "Please Enter A Valid Email" : "",
@@ -46,13 +47,13 @@ const ForgetPassword = ({ setPage }: any) => {
     };
 
     const submitHandler = () => {
-        if (!userInfo.isPhoneShow) setPage("email");
-        if (!userInfo.isEmailShow) setPage("number");
+        if (!formData.isPhoneShow) setPage("email");
+        if (!formData.isEmailShow) setPage("number");
 
-        if (userInfo.phone === "" || userInfo.email === "") {
-            setUserInfo((prevUserInfo) => ({ ...prevUserInfo, emailOrPhoneError: "Please Enter Phone Or Email" }));
+        if (formData.phone === "" || formData.email === "") {
+            setFormData((prevUserInfo) => ({ ...prevUserInfo, emptyEmailError: "Please Enter Your Email", emptyPhoneError : "Please Enter Your Phone Number" }));
         } else {
-            setUserInfo((prevUserInfo) => ({ ...prevUserInfo, emailOrPhoneError: "" }));
+            setFormData((prevUserInfo) => ({ ...prevUserInfo, emptyEmailError: "", emptyPhoneError : "" }));
         }
     };
 
@@ -68,23 +69,23 @@ const ForgetPassword = ({ setPage }: any) => {
                 <div className="w-full max-h-[574px] flex-col justify-start items-start gap-5 inline-flex">
                     <div className="text-black text-4xl font-semibold leading-[48px]">Forget Password </div>
                     <div>Choose how you want to reset password</div>
-                    <div className="px-px py-[15px] w-full mb-3">
-                        {userInfo.isEmailShow && (
+                    <div className="px-px py-[15px] w-full">
+                        {formData.isEmailShow && (
                             <div>
                                 <Input
                                     DefaultImage={defaultEmail}
                                     activeImage={activeEmail}
                                     type="email"
                                     name="email"
-                                    value={userInfo.email}
                                     placeholder="Email address"
                                     onChange={handleChange}
+                                    fieldData = {formData?.emptyEmailError}
                                 />
-                                <span className="text-red-500 text-sm px-4 ">{userInfo.emailError}</span>
+                                <span className="text-red-500 text-sm px-2 ">{formData.emailError}{formData?.emptyEmailError}</span>
                             </div>
                         )}
 
-                        {!((!userInfo.isPhoneShow && userInfo.isEmailShow) || (userInfo.isPhoneShow && !userInfo.isEmailShow)) && (
+                        {!((!formData.isPhoneShow && formData.isEmailShow) || (formData.isPhoneShow && !formData.isEmailShow)) && (
                             <div className="flex mb-6">
                                 <div className="w-[45%] border my-3 mr-[11px]"></div>
                                 <div className="text-stone-300">Or</div>
@@ -92,18 +93,18 @@ const ForgetPassword = ({ setPage }: any) => {
                             </div>
                         )}
 
-                        {userInfo.isPhoneShow && (
+                        {formData.isPhoneShow && (
                             <div>
                                 <Input
                                     DefaultImage={defaultPhone}
                                     activeImage={activePhone}
                                     type="text"
                                     name="phone"
-                                    value={userInfo.phone}
                                     placeholder="Phone Number"
                                     onChange={handleChange}
+                                    fieldData = {formData?.emptyPhoneError}
                                 />
-                                <span className="text-red-500 text-sm px-4 ">{userInfo.errorMessage}{userInfo.emailOrPhoneError}</span>
+                                <span className="text-red-500 text-sm px-2 ">{formData.phoneError}{formData.emptyPhoneError}</span>
                             </div>
                         )}
                         <br />
@@ -113,4 +114,5 @@ const ForgetPassword = ({ setPage }: any) => {
         </>
     );
 };
+
 export default ForgetPassword;
