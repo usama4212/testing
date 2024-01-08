@@ -75,13 +75,13 @@ interface InputProps {
   onClick?: () => void;
   icon?: StaticImageData;
   formData?: formData;
-  value: string;
+  value?: string;
   fieldData?: any;
 }
 interface formData {
-  userName: string;
-  email: string;
-  phone: string;
+  userName?: string;
+  email?: string;
+  phone?: string;
   password: string;
   confirmPassword: string;
 }
