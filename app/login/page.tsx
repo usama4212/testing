@@ -19,6 +19,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
+import { useRouter } from "next/navigation";
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -29,9 +30,8 @@ const LoginPage = () => {
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phoneError, setPhoneError] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-
+  const [inputsError, setInputsError] = useState("");
+  const router = useRouter()
   const setValue = (e: any) => {
     const { value, name } = e.target;
     if (name === "phone") {
@@ -45,7 +45,7 @@ const LoginPage = () => {
       setPhone(value);
     } else {
       console.log(inputs);
-      setPasswordError("")
+      setInputsError("");
       setInputs((prev) => {
         return { ...prev, [name]: value };
       });
@@ -62,17 +62,22 @@ const LoginPage = () => {
       if (!saudiPhoneNumberRegex.test(phone)) {
         setPhoneError("Please enter a valid phone number.");
         return;
+      } else {
+        router.push("/login/verify")
+        return;
       }
     } else if (loginOption == "email") {
       if (inputs.email && inputs.password) {
         alert("email and password");
       } else {
-        setPasswordError("Please fill all details");
+        setInputsError("Please fill all details");
         return;
       }
     }
     alert("form submitted");
   };
+
+  const otpSubmitHandler = () => {};
 
   return (
     <>
@@ -83,7 +88,7 @@ const LoginPage = () => {
         submitHandler={submitHandler}
         buttonText="Sign in"
       >
-        <div className="w-full max-h-[574px] flex-col justify-start items-start gap-5 inline-flex">
+        <div className="w-full max-h-[574px] flex-col justify-start items-start gap-4 inline-flex">
           <div className="text-black text-4xl font-semibold  leading-[48px]">
             Sign In{" "}
           </div>
@@ -98,6 +103,7 @@ const LoginPage = () => {
                   DefaultImage={phoneImage}
                   activeImage={activePhone}
                   type="text"
+                  value={phone}
                   name="phone"
                   placeholder="+9661233453"
                   onChange={setValue}
@@ -115,6 +121,7 @@ const LoginPage = () => {
                   activeImage={activeEmail}
                   type="email"
                   name="email"
+                  value={inputs.email}
                   placeholder="Email address"
                   onChange={setValue}
                 />
@@ -123,6 +130,7 @@ const LoginPage = () => {
                   activeImage={activePassword}
                   type={showPassword ? "text" : "password"}
                   name="password"
+                  value={inputs.password}
                   placeholder="Password"
                   onChange={setValue}
                   icon={showPassword ? eye : eyeOff}
@@ -132,7 +140,7 @@ const LoginPage = () => {
                 />
                 <div className="">
                   <span className="text-red-500 text-sm px-4 float-left  ">
-                    {passwordError}
+                    {inputsError}
                   </span>
                   <Link
                     href="/forget"

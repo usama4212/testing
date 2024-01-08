@@ -11,7 +11,6 @@ const AuthLayout = ({
   submitHandler,
   buttonText,
 }: AuthLayoutProps) => {
-
   return (
     <div className=" min-h-screen w-full flex">
       <div className="md:w-[50%] bg-primary min-h-screen flex items-center justify-center backdrop-blur-xl">
@@ -39,7 +38,7 @@ const AuthLayout = ({
             e.preventDefault();
             submitHandler();
           }}
-          className="lg:w-1/2 mx-auto p-4"
+          className="lg:w-[60%] md:w-3/4 w-full  mx-auto py-4 px-4 md:px-0"
         >
           {children}
           <input

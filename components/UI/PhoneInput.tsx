@@ -9,6 +9,7 @@ const PhoneInput = ({
     placeholder,
     name,
     onChange,
+    value
     
   }: any) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -25,6 +26,7 @@ const PhoneInput = ({
       <input
         type={type}
         name={name}
+        value={value}
         className=" focus:border-gray-400 focus:border focus:outline-none  p-4 ps-10 w-full  bg-white  rounded-[10px] border-[0.2px] "
         placeholder={placeholder}
         onChange={onChange}
