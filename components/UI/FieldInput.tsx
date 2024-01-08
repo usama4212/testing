@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Image, { StaticImageData } from "next/image";
 import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
-
 const Input = ({
   DefaultImage,
   activeImage,
@@ -14,6 +13,7 @@ const Input = ({
   icon,
   formData,
   value,
+  fieldData,
 }: InputProps) => {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -21,35 +21,23 @@ const Input = ({
 
   const handleBlur = () => setIsFocused(false);
 
-  const handleBlur = () => setIsFocused(false)
-
-
-    return (
-        <div className="px-px w-full">
-            <div className="relative">
-                <div
-                    className="absolute inset-y-0 start-0 pl-3 flex items-center ps-3 pointer-events-none">
-                    <Image src={isFocused ? activeImage : DefaultImage} alt="Image"></Image>
-                </div>
-                <input
-                    type={type}
-                    name={name}
-                    value={value}
-                    className=" focus:border-gray-400 focus:border focus:outline-none  p-4 ps-10 w-full  bg-white  rounded-[10px] border-[0.2px] "
-                    placeholder={placeholder}
-                    onChange={onChange}
-                    onFocus={handleFocus}
-                    onBlur={handleBlur}
-                    autoComplete="off"
-                />
-                {(name == "password" && formData?.password !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image'/></span>}
-                {(name == "confirmPassword" && formData?.confirmPassword !== '') && <span className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer" onClick={onClick} ><Image src={icon} alt='image' /></span>}
-            </div>
+  return (
+    <div className="px-px w-full">
+      <div className="relative">
+        <div className="absolute inset-y-0 start-0 pl-3 flex items-center ps-3 pointer-events-none">
+          <Image
+            src={isFocused ? activeImage : DefaultImage}
+            alt="Image"
+          ></Image>
         </div>
         <input
           type={type}
           name={name}
-          className=" focus:border-gray-400 focus:border focus:outline-none  p-4 ps-10 w-full  bg-white  rounded-[10px] border-[0.2px] "
+          className={`focus:border-${
+            fieldData ? "bg-red-600" : "gray-400"
+          } focus:border focus:outline-none  p-4 ps-10 w-full bg-white rounded-[10px] border-[1px] border-${
+            fieldData ? "red-600" : ""
+          }`}
           placeholder={placeholder}
           onChange={onChange}
           value={value}
@@ -62,7 +50,7 @@ const Input = ({
             className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
             onClick={onClick}
           >
-            {icon &&<Image src={icon} alt="image" />}
+            {icon && <Image src={icon} alt="image" />}
           </span>
         )}
         {name == "confirmPassword" && formData?.confirmPassword !== "" && (
@@ -70,7 +58,7 @@ const Input = ({
             className="absolute top-1/2 right-4 transform -translate-y-1/2 cursor-pointer"
             onClick={onClick}
           >
-            {icon &&<Image src={icon} alt="image" />}
+            {icon && <Image src={icon} alt="image" />}
           </span>
         )}
       </div>
@@ -78,22 +66,23 @@ const Input = ({
   );
 };
 interface InputProps {
-  DefaultImage: StaticImageData ;
+  DefaultImage: StaticImageData;
   activeImage: StaticImageData;
   type: string;
   placeholder: string;
   name: string;
   onChange: (e: any) => void;
-  onClick?: () => void ;
-  icon?: StaticImageData ;
-  formData?: formData ;
+  onClick?: () => void;
+  icon?: StaticImageData;
+  formData?: formData;
   value: string;
+  fieldData?: any;
 }
 interface formData {
-  userName: string,
-  email : string,
-  phone : string,
-  password : string,
-  confirmPassword : string,
+  userName: string;
+  email: string;
+  phone: string;
+  password: string;
+  confirmPassword: string;
 }
 export default Input;

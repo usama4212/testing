@@ -76,6 +76,7 @@ const ForgetPassword = ({ setPage }: any) => {
                                     activeImage={activeEmail}
                                     type="email"
                                     name="email"
+                                    value={userInfo.email}
                                     placeholder="Email address"
                                     onChange={handleChange}
                                 />
@@ -98,6 +99,7 @@ const ForgetPassword = ({ setPage }: any) => {
                                     activeImage={activePhone}
                                     type="text"
                                     name="phone"
+                                    value={userInfo.phone}
                                     placeholder="Phone Number"
                                     onChange={handleChange}
                                 />

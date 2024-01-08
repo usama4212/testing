@@ -10,3 +10,10 @@ export const passwordRegexer = /^(?=.*[A-Z])(?=.*[!@#$%^&*])(?=.*[0-9]).*$/;
 
 export const phoneNumberRegex = /^[+0-9][0-9]*$/;
 export const saudiPhoneNumberRegex = /^(?:\+?966|00966|0)?\s?5[0-9]{8}$/;
+export const phoneRegexError = "Please enter A Valid phone number";
+
+
+
+
+
+
