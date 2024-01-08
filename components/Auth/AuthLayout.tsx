@@ -14,15 +14,15 @@ const AuthLayout = ({
   return (
     <div className=" min-h-screen w-full flex">
       <div className="md:w-[50%] bg-primary min-h-screen flex items-center justify-center backdrop-blur-xl">
-        <div className=" justify-center">
+        <div className=" justify-center px-5 md:px-0 lg:w-[50%] space-y-5">
           <div className="flex justify-center">
             <Image alt="sign in " src={picture} className="" />
           </div>
           <div className="text-center">
-            <span className="text-black text-3xl font-semibold  leading-[60px]">
+            <span className="text-black text-3xl font-semibold  ">
               {title} <br />
             </span>
-            <span className="text-black text-sm font-normal  leading-7">
+            <span className="text-center text-black text-sm font-normal  leading-7 ">
               {subtitle}
             </span>
           </div>
@@ -38,7 +38,7 @@ const AuthLayout = ({
             e.preventDefault();
             submitHandler();
           }}
-          className="lg:w-[60%] md:w-3/4 w-full  mx-auto py-4 px-4 md:px-0"
+          className="lg:max-w-[60%] xl:max-w-[55%] md:w-3/4 w-full  mx-auto py-4 px-4 md:px-0"
         >
           {children}
           <input
