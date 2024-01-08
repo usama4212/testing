@@ -13,30 +13,21 @@ import activePassword from "@/assets/activePassword.svg";
 import FieldInput from "../../components/UI/FieldInput";
 import eye from "@/assets/eye.svg";
 import eyeSlash from "@/assets/eye-slash.svg";
-import {
-  emailRegex,
-  numberRegex,
-  passwordRegexer,
-  regexError,
-  specialCharacterRegex,
-  upperCaseRegex,
-  withoutNumberRegex,
-  withoutSpecialRegex,
-  withoutUppercaseRegex,
-} from "@/components/Constants";
+
+import { emailRegex, numberRegex, passwordRegexer, regexError, specialCharacterRegex, upperCaseRegex, withoutNumberRegex, withoutSpecialRegex, withoutUppercaseRegex } from "@/components/Constants";
+
 
 const SignupPage = () => {
-  const [formData, setFormData] = useState({
-    userName: "",
-    email: "",
-    phone: "",
-    password: "",
-    confirmPassword: "",
-  });
-  const [formDataError, setFormDataError] = useState<any>({});
+
+  const [formData, setFormData] = useState({ userName: '', email: '', phone: '', password: '', confirmPassword: '' });
+  const [formDataError, setFormDataError] = useState<any>({})
   const [passwordRegex, setPasswordRegex] = useState("");
-  const [showPassword1, setShowPassword1] = useState(false);
-  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPasswords, setShowPasswords] = useState({password: false, confirmPassword: false});
+
+
+  const handleEyeToggle = (passwordKey: keyof typeof showPasswords) => {
+    setShowPasswords((prevState) => ({...prevState, [passwordKey]: !prevState[passwordKey]}));
+  };
 
   const handleChange = (e: any) => {
     const { name, value } = e.target;
@@ -122,20 +113,8 @@ const SignupPage = () => {
 
   const PasswordCheck = ({ condition, text }: any) => (
     <div className="flex">
-      <div
-        className={`mt-1 w-3 h-3 sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-3 xl:h-3 rounded-full ${
-          condition
-            ? "bg-green-900 border border-green-900"
-            : "bg-white border border-black"
-        }`}
-      ></div>
-      <div
-        className={`ml-5 text-xs sm:text-sm md:text-md lg:text-sm xl:text-sm ${
-          condition ? "text-green-900" : ""
-        }`}
-      >
-        {text}
-      </div>
+      <div className={`mt-1 w-3 h-3 sm:w-3 sm:h-3 md:w-3 md:h-3 lg:w-3 lg:h-3 xl:w-3 xl:h-3 rounded-full ${(condition) ? "bg-green-900 border border-green-900" : "bg-white border border-black"}`}></div>
+      <div className={"ml-5 text-xs sm:text-sm md:text-md lg:text-sm xl:text-sm text-black"}>{text}</div>
     </div>
   );
 
@@ -152,63 +131,42 @@ const SignupPage = () => {
           <div className="text-black text-4xl font-semibold  leading-[48px] mb-5">
             Create Account{" "}
           </div>
-          <FieldInput
-            DefaultImage={DefaultName}
-            activeImage={activeName}
-            type="text"
-            placeholder="Name"
-            name="userName"
-            value={formData.userName}
-            onChange={handleChange}
-            
-          />
-          <div className="text-red-500 text-sm h-[30px]">
-            {formDataError?.userName}
-          </div>
+          <FieldInput DefaultImage={DefaultName} activeImage={activeName} type="text" value={formData.userName} placeholder="Name"  name="userName" onChange={handleChange} formDataError={formDataError} />
+          <div className="text-red-500 text-sm h-[30px]">{formDataError?.userName}</div>
 
-          <FieldInput
-            DefaultImage={defaultEmail}
-            activeImage={activeEmail}
-            type="text"
-            placeholder="Email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-          />
-          <div className="text-red-500 text-sm h-[30px]">
-            {formDataError?.email}
-            {formDataError?.regex}
-          </div>
+          <FieldInput DefaultImage={defaultEmail} activeImage={activeEmail} type="text" value={formData.email} placeholder="Email" name="email" onChange={handleChange} />
+          <div className="text-red-500 text-sm h-[30px]">{formDataError?.email}{formDataError?.regex}</div>
 
-          <FieldInput
-            DefaultImage={defaultPhone}
-            activeImage={activePhone}
-            type="text"
-            placeholder="Phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-          />
-          <div className="text-red-500 text-sm h-[30px]">
-            {formDataError?.phone}
-          </div>
-
+          <FieldInput DefaultImage={defaultPhone} activeImage={activePhone} type="text" value={formData.phone} placeholder="Phone" name="phone" onChange={handleChange} />
+          <div className="text-red-500 text-sm h-[30px]">{formDataError?.phone}</div>
+          
           <FieldInput
             DefaultImage={defaultPassword}
             activeImage={activePassword}
-            type={showPassword1 ? "text" : "password"}
+            type={showPasswords.password ? 'text' : 'password'}
             placeholder="Password"
             name="password"
             value={formData.password}
             formData={formData}
             onChange={handleChange}
-            onClick={() => setShowPassword1(!showPassword1)}
-            icon={showPassword1 ? eye : eyeSlash}
+            onClick={() => handleEyeToggle('password')}
+            icon={showPasswords.password ? eye : eyeSlash}
           />
-          <div className="text-red-500 text-sm h-[30px]">
-            {formDataError?.password}
-          </div>
-
+          <div className="text-red-500 text-sm h-[30px]">{formDataError?.password}</div>
+          
+          <FieldInput
+            DefaultImage={defaultPassword}
+            activeImage={activePassword}
+            type={showPasswords.confirmPassword ? 'text' : 'password'}
+            placeholder="Confirm Password"
+            name="confirmPassword"
+            value={formData.confirmPassword}
+            formData={formData}
+            onChange={handleChange}
+            onClick={() => handleEyeToggle('confirmPassword')}
+            icon={showPasswords.confirmPassword ? eye : eyeSlash}
+          />
+          <div className="text-red-500 text-sm h-[30px]">{formDataError?.confirmPassword}</div>
           <FieldInput
             DefaultImage={defaultPassword}
             activeImage={activePassword}
@@ -225,44 +183,14 @@ const SignupPage = () => {
             {formDataError?.confirmPassword}
           </div>
         </div>
-
-        <div className="mb-16 sm:mb-16 md:mb-16 lg:mb-16 xl:mb-16 2xl:mb-16 mt-5">
-          <PasswordCheck
-            condition={
-              passwordRegex === "Uppercase" ||
-              passwordRegex === "All satisfied" ||
-              passwordRegex === "Without Number" ||
-              passwordRegex === "Without Specail"
-            }
-            text="Contains at least one uppercase letter"
-          />
-          <PasswordCheck
-            condition={
-              passwordRegex === "Special character" ||
-              passwordRegex === "All satisfied" ||
-              passwordRegex === "Without Number" ||
-              passwordRegex === "Without Uppercase"
-            }
-            text="Contains at least one special character"
-          />
-          <PasswordCheck
-            condition={
-              passwordRegex === "Number" ||
-              passwordRegex === "All satisfied" ||
-              passwordRegex === "Without Specail" ||
-              passwordRegex === "Without Uppercase"
-            }
-            text="Contains at least one number"
-          />
-          <PasswordCheck
-            condition={
-              formData.password === formData.confirmPassword &&
-              formData.password !== "" &&
-              formData.confirmPassword !== ""
-            }
-            text="Passwords are matching"
-          />
-        </div>
+        {(formData.password !== "" || formData.confirmPassword !== "") &&
+          <div className="mb-16 sm:mb-16 md:mb-16 lg:mb-16 xl:mb-16 2xl:mb-16 mt-5">
+            <PasswordCheck condition={passwordRegex === "Uppercase" || passwordRegex === "All satisfied" || passwordRegex === "Without Number" || passwordRegex === "Without Specail"} text="Contains at least one uppercase letter" />
+            <PasswordCheck condition={passwordRegex === "Special character" || passwordRegex === "All satisfied" || passwordRegex === "Without Number" || passwordRegex === "Without Uppercase"} text="Contains at least one special character" />
+            <PasswordCheck condition={passwordRegex === "Number" || passwordRegex === "All satisfied" || passwordRegex === "Without Specail" || passwordRegex === "Without Uppercase"} text="Contains at least one number" />
+            <PasswordCheck condition={(formData.password === formData.confirmPassword) && formData.password !== "" && formData.confirmPassword !== ""} text="Passwords are matching" />
+          </div>
+        }
       </AuthLayout>
     </>
   );
