@@ -12,17 +12,17 @@ const AuthLayout = ({
   buttonText,
 }: AuthLayoutProps) => {
   return (
-    <div className=" min-h-screen w-full flex">
-      <div className="md:w-[50%] bg-primary min-h-screen flex items-center justify-center backdrop-blur-xl">
-        <div className=" justify-center px-5 md:px-0 lg:w-[50%] space-y-5">
+    <div className=" min-h-screen w-full sm:flex">
+      <div className=" md:w-[50%] bg-primary md:min-h-screen flex items-center justify-center backdrop-blur-xl">
+        <div className=" justify-center px-5 md:px-0 lg:w-[85%] xl:w- space-y-5">
           <div className="flex justify-center">
             <Image alt="sign in " src={picture} className="" />
           </div>
           <div className="text-center">
-            <span className="text-black text-3xl font-semibold  ">
+            <span className="text-black text-2xl font-semibold   ">
               {title} <br />
             </span>
-            <span className="text-center text-black text-sm font-normal  leading-7 ">
+            <span className="text-center text-black text-sm font-normal w-[70%] block mx-auto pt-2 ">
               {subtitle}
             </span>
           </div>

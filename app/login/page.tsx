@@ -20,7 +20,11 @@ import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
 import { useRouter } from "next/navigation";
-import { emailRegex, saudiPhoneNumberRegex } from "@/components/Constants";
+import {
+  emailRegex,
+  phoneNumberRegex,
+  saudiPhoneNumberRegex,
+} from "@/components/Constants";
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -40,7 +44,6 @@ const LoginPage = () => {
     const { value, name } = e.target;
     if (name === "phone") {
       console.log(phone);
-      const phoneNumberRegex = /^[+0-9][0-9]*$/;
       if (!phoneNumberRegex.test(value) && value.length > 0) {
         setPhoneError("Invalid Phone Number");
       } else {
@@ -112,8 +115,8 @@ const LoginPage = () => {
   return (
     <>
       <AuthLayout
-        title="Welcome"
-        subtitle="You can connect with thousands of Buyers and Sellers"
+        title="Welcome Back to Scrapyard!"
+        subtitle="Log in to your account to continue buying, selling scrap, and auctioning products."
         picture={loginOption == "phone" ? signImage : loginImage}
         submitHandler={submitHandler}
         buttonText="Sign in"
