@@ -22,7 +22,7 @@ const AuthLayout = ({
             <span className="text-black text-2xl font-semibold   ">
               {title} <br />
             </span>
-            <span className="text-center text-black text-sm font-normal w-[70%] block mx-auto pt-2 ">
+            <span className="text-center text-black text-sm font-normal max-w-[70%] block mx-auto pt-2 ">
               {subtitle}
             </span>
           </div>
@@ -30,7 +30,7 @@ const AuthLayout = ({
       </div>
 
       <div
-        className={`md:w-[50%]  min-h-screen flex items-center justify-center  bg-no-repeat bg-cover  `}
+        className={`min-w-[50%] md:w-[50%]  min-h-screen flex items-center justify-center  bg-no-repeat bg-cover  `}
         style={{ backgroundImage: `url(${bg.src}) ` }}
       >
         <form
