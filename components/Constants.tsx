@@ -3,6 +3,7 @@ export const regexError = "Please Enter valid Email Address";
 export const upperCaseRegex = /[A-Z]/;
 export const specialCharacterRegex = /[!@#$%^&*]/;
 export const numberRegex = /[0-9]/;
+export const onlyNumberRegex = /^[0-9]*$/;
 export const withoutNumberRegex = /^(?=.*[A-Z])(?=.*[!@#$%^&*]).*$/;
 export const withoutSpecialRegex = /^(?=.*[A-Z])(?=.*[0-9]).*$/;
 export const withoutUppercaseRegex = /^(?=.*[!@#$%^&*])(?=.*[0-9]).*$/;
