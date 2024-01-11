@@ -54,10 +54,7 @@ const Otp = ({ page, pageName }: OtpProps) => {
   const handlePaste = (e: any) => {
     e.preventDefault();
     const pasteData = e.clipboardData.getData("text/plain");
-    const digits = pasteData
-      .replace(/[^0-9]/g, "")
-      .split("")
-      .slice(0, 4);
+    const digits = pasteData.replace(/[^0-9]/g, "").split("").slice(0, 4);
 
     const newCode = [...code];
     digits.forEach((digit: any, index: any) => {

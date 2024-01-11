@@ -60,8 +60,8 @@ const ForgetPassword = ({ setPage }: any) => {
     return (
         <>
             <AuthLayout
-                title="Forget Password?"
-                subtitle="You can connect with thousands of Buyers and Sellers"
+                title="Forget Password"
+                subtitle="Please choose way to reset your password"
                 picture={forgetIcon}
                 submitHandler={submitHandler}
                 buttonText="Continue"

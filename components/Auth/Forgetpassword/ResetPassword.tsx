@@ -10,6 +10,7 @@ import activePassword from "@/assets/activePassword.svg";
 import { useRouter } from "next/navigation";
 
 const ResetPassword = () => {
+
     const [formData, setFormData] = useState({ password: '', confirmPassword: '' });
     const [formDataError, setFormDataError] = useState<any>({})
     const [showPasswords, setShowPasswords] = useState({password: false, confirmPassword: false});
@@ -57,6 +58,8 @@ const ResetPassword = () => {
         }
         
     }
+
+    
     return (
         <AuthLayout
             title="Reset your Password"

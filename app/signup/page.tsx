@@ -15,10 +15,13 @@ import eye from "@/assets/eye.svg";
 import eyeSlash from "@/assets/eye-slash.svg";
 import { emailRegex, numberRegex, passwordRegexer, phoneRegexError, regexError, saudiPhoneNumberRegex, specialCharacterRegex, upperCaseRegex, withoutNumberRegex, withoutSpecialRegex, withoutUppercaseRegex } from "@/components/Constants";
 const SignupPage = () => {
+  
   const [formData, setFormData] = useState({ userName: '', email: '', phone: '', password: '', confirmPassword: '' });
   const [formDataError, setFormDataError] = useState<any>({})
   const [passwordRegex, setPasswordRegex] = useState("");
   const [showPasswords, setShowPasswords] = useState({ password: false, confirmPassword: false });
+
+
   const handleEyeToggle = (passwordKey: keyof typeof showPasswords) => {
     setShowPasswords((prevState) => ({ ...prevState, [passwordKey]: !prevState[passwordKey] }));
   };
@@ -42,6 +45,7 @@ const SignupPage = () => {
 
     if (name === "password" || name === "confirmPassword") {
       let status = "";
+
       if (upperCaseRegex.test(value)) status = "Uppercase"
       if (specialCharacterRegex.test(value)) status = "Special character"
       if (numberRegex.test(value)) status = "Number"
@@ -91,7 +95,7 @@ const SignupPage = () => {
   );
   return (
     <>
-      <AuthLayout title="Welcome" subtitle="Create an Account" picture={signImage} submitHandler={submitHandler} buttonText="Create Account" >
+      <AuthLayout title="Welcome to Scrapyard" subtitle="Sign up at Scrapyard - the ultimate online hub for selling sacrap and auctioning various items. Connect, buy, and sell now!" picture={signImage} submitHandler={submitHandler} buttonText="Create Account" >
         <div className="w-full max-h-[574px] flex-col justify-start items-start inline-flex space-y-4">
           <div className="text-black text-4xl font-semibold  leading-[48px] mb-5">
             Create Account{" "}
