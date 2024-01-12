@@ -24,7 +24,7 @@ const CardsCollection = ({ title }: any) => {
 
     return (
         <div>
-            <div className='mx-4 md:mx-8 lg:mx-16 mt-10'>
+            <div className='mx-4 md:mx-8 lg:mx-16'>
                 <div className="container mx-auto my-8">
                     <div className='flex relative'>
                         <div className='text-black text-lg sm:text-2xl font-extrabold mb-8 mt-12'>
@@ -38,34 +38,34 @@ const CardsCollection = ({ title }: any) => {
                     <div className="flex flex-wrap">
                         {title == "Featured Auctions" &&
                             <>
-                                <Cards scrapImage={scrap1} scrapTitle={"Electric Scrap"} />
-                                <Cards scrapImage={scrap2} scrapTitle={"Motor Scrap"} />
-                                <Cards scrapImage={scrap3} scrapTitle={"Nuts Scrap"} />
-                                <Cards scrapImage={scrap4} scrapTitle={"Paper scrap"} />
+                                <Cards scrapImage={scrap1} scrapTitle={"Electric Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap2} scrapTitle={"Motor Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap3} scrapTitle={"Nuts Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap4} scrapTitle={"Paper scrap"}  classname = {"1/4"}/>
                             </>
                         }
                         {title == "Electronics Auction" &&
                             <>
-                                <Cards scrapImage={scrap5} scrapTitle={"Owen Scrap"} />
-                                <Cards scrapImage={scrap6} scrapTitle={"Geezer Scrap"} />
-                                <Cards scrapImage={scrap7} scrapTitle={"Machine Scrap"} />
-                                <Cards scrapImage={scrap8} scrapTitle={"Iron scrap"} />
+                                <Cards scrapImage={scrap5} scrapTitle={"Owen Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap6} scrapTitle={"Geezer Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap7} scrapTitle={"Machine Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap8} scrapTitle={"Iron scrap"}  classname = {"1/4"}/>
                             </>
                         }
                         {title == "Baby Products Auction" &&
                             <>
-                                <Cards scrapImage={scrap9} scrapTitle={"Feeder Scrap"} />
-                                <Cards scrapImage={scrap10} scrapTitle={"Toys Scrap"} />
-                                <Cards scrapImage={scrap11} scrapTitle={"Blocks Scrap"} />
-                                <Cards scrapImage={scrap12} scrapTitle={"Cars scrap"} />
+                                <Cards scrapImage={scrap9} scrapTitle={"Feeder Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap10} scrapTitle={"Toys Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap11} scrapTitle={"Blocks Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap12} scrapTitle={"Cars scrap"}  classname = {"1/4"}/>
                             </>
                         }
                         {title == "Clothes Auction" &&
                             <>
-                                <Cards scrapImage={scrap13} scrapTitle={"Shirt Scrap"} />
-                                <Cards scrapImage={scrap14} scrapTitle={"Pents Scrap"} />
-                                <Cards scrapImage={scrap15} scrapTitle={"Two Piece Scrap"} />
-                                <Cards scrapImage={scrap16} scrapTitle={"Watch scrap"} />
+                                <Cards scrapImage={scrap13} scrapTitle={"Shirt Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap14} scrapTitle={"Pents Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap15} scrapTitle={"Two Piece Scrap"}  classname = {"1/4"}/>
+                                <Cards scrapImage={scrap16} scrapTitle={"Watch scrap"}  classname = {"1/4"}/>
                             </>
                         }
 

@@ -10,7 +10,7 @@ import flower from "@/assets/flower.svg";
 const ScrapApp = () => {
     return (
         <div>
-            <div className="text-white bg-no-repeat bg-cover pb-8 mt-44" style={{ backgroundImage: `url(${gradient.src})` }}>
+            <div className="text-white bg-no-repeat bg-cover pb-8 mt-36" style={{ backgroundImage: `url(${gradient.src})` }}>
                 <div className="container mx-auto flex flex-col lg:flex-row items-center">
                     <div className="relative z-10 lg:w-1/2">
                         <Image src={mobileApp} alt="Left Image" className="w-full object-cover object-top ml-2 sm:ml-0 -mt-12 lg:-mt-24 " />
