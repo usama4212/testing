@@ -1,0 +1,14 @@
+.slick-center {
+  /* Apply your custom styles to the focused slide */
+
+  border-top: 20px;
+  border-color: black;
+  border-width: 10px;
+  border-radius: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: #FFC700;
+  
+
+  /* transform: scale(1.2); Example: scale up the focused slide */
+}

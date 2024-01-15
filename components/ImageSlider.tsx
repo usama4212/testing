@@ -60,7 +60,7 @@ const ImageSlider = () => {
         //         ))}
         //     </Slider>
         // </div>
-        <div className='flex items-center justify-center'>
+        <div className='flex items-center max-w-7xl mx-auto justify-center'>
         <Image src={slider2} alt='image' className='w-[1505px]' />
       </div>
     )

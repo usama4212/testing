@@ -13,7 +13,7 @@ import React from 'react'
 const page = () => {
   return (
 
-    <div className='bg-[#e9e9e9]'>
+    <div className='bg-[#e9e9e9] '>
       <ImageSlider />
       <Categories />
       <CardsCollection title = {"Featured Auctions"} />
@@ -23,7 +23,7 @@ const page = () => {
       <CardsCollection title = {"Clothes Auction"} />
       <ScrapSell/>
       <ScrapApp/>
-      <Footer/>
+      
     </div>
   )
 

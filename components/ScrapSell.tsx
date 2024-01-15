@@ -4,7 +4,7 @@ import sellNow from "@/assets/sell-now.png";
 
 const ScrapSell = () => {
     return (
-        <div className='mx-4 md:mx-8 lg:mx-16 mt-24 min-h-[185px]'>
+        <div className=' mt-24 min-h-[185px]'>
             <div className="container mx-auto my-8 relative">
                 <div className='flex'>
                     <div className="absolute left-1/2 -translate-x-1/2 sm:translate-x-0  sm:left-[50px]  md:left-[100px] lg:left-[130px] top-0 sm:top-1/2 transform sm:-translate-y-1/2 text-white text-left">

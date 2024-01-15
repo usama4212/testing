@@ -9,7 +9,7 @@ export default function SubHeader() {
     <>
       {/*  Search Header */}
       <div className="flex mx-auto max-w-7xl px-2 xmd:px-6 lg:px-8 py-3 h-[91px]  ">
-        <div className="flex flex-1 items-center justify-center xmd:items-stretch xmd:justify-start  ">
+        <div className="flex flex-1 items-center justify-center xmd:items-stretch xmd:justify-center  ">
           {/* Form */}
           <div className="flex items-center w-full">
             <label htmlFor="simple-search" className="sr-only">
@@ -39,8 +39,10 @@ export default function SubHeader() {
                 required
               />
             </div>
-            <CategoriesDropDown />
-            <PriceRangeDropdown />
+            <div className="hidden md:flex">
+              <CategoriesDropDown />
+              <PriceRangeDropdown />
+            </div>
             {/* Search Button */}
 
             <button
