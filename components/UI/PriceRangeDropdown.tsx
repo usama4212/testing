@@ -76,7 +76,8 @@ export default function PriceRangeDropdown() {
           </svg>
         </button>
         {showDropdown && (
-          <ul className="dropdown-content absolute  bg-white text-gray-900 border pt-1 w-52">
+
+          <ul className="dropdown-content absolute bg-white text-gray-900 border pt-1 w-52">
             <li className="px-4 py-2 flex space-x-2">
               <input
                 type="text"
@@ -128,7 +129,7 @@ export default function PriceRangeDropdown() {
                   }}
                 >
                   <span
-                    className=" hover:bg-gray-200 cursor-pointer py-2 px-4 block whitespace-no-wrap"
+                    className=" hover:bg-gray-200  cursor-pointer py-2 px-4 block whitespace-no-wrap"
                     onClick={() => {
                       setSelecetedOption(category.name);
                       setShowDropdown(!showDropdown);

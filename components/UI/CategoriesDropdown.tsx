@@ -157,7 +157,8 @@ export default function CategoryDropdown() {
           </svg>
         </button>
         {showDropdown && (
-          <ul className="dropdown-content absolute z-10 bg-white text-gray-900 border pt-1 w-[320px]">
+
+          <ul className="dropdown-content absolute bg-white z-10 text-gray-900 border pt-1 w-[320px]">
             {categories.map((category, index) => {
               return (
                 <li

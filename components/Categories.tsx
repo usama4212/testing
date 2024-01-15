@@ -51,7 +51,6 @@ const Categories = () => {
     image: val,
     title: categoryName[i],
   }));
-
   return (
     <div>
       <div className="max-w-7xl mx-auto mt-10">
@@ -81,6 +80,7 @@ const Categories = () => {
                     />
                     <div className="text-black text-base font-normal font-Poppins leading-normal">
                       {val.title}
+
                     </div>
                   </div>
                 </div>

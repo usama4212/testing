@@ -10,11 +10,13 @@ import ScrapApp from './ScrapApp';
 import Footer from './Footer';
 import Select from "react-select";
 import { customStyles } from './CustomeStyle';
+import { categories } from './Constants';
 
 const ProductDetails = ({ name }: any) => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [view, setView] = useState('list');
     const [sortBy, setSortBy] = useState('default');
+    const [currentSubcategories, setCurrentSubcategories] = useState<string[]>([]);
 
     const subCategories = ["Mobile Phones & Accessories", "Computers & Tablets", "Cameras & Photography Equipment", "Televisions & Home Audio Systems"];
 
@@ -45,6 +47,12 @@ const ProductDetails = ({ name }: any) => {
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize)
     }, []);
+    useEffect(() => {
+        const selectedCategory = categories.find(category => category.name === name);
+        if (selectedCategory) {
+            setCurrentSubcategories(selectedCategory.subcategory);
+        }
+    }, [name]);
 
 
 
@@ -53,11 +61,11 @@ const ProductDetails = ({ name }: any) => {
             <div className='mx-4 md:mx-8 lg:mx-16'>
                 <div className="container mx-auto flex flex-col md:flex-row lg:flex-row">
                     <div className='w-full md:w-1/4 lg:w-1/4'>
-                        <div className='text-black text-lg sm:text-2xl font-extrabold mb-5 mt-8 ml-4'>Filters</div>
+                        <div className='text-black text-lg sm:text-4xl font-extrabold mb-5 mt-8 ml-4'>Filters</div>
                         <div className="border-b border-black w-full"></div>
                         <div className='text-black text-lg sm:text-2xl font-extrabold mb-4 mt-5 ml-4'>Price</div>
                         <div className='text-black text-lg sm:text-2xl font-extrabold mb-4 mt-5 ml-4'>Categories</div>
-                        <div className='text-black text-lg sm:text-lg  mb-4 mt-3 ml-4'>All Categories</div>
+                        {/* <div className='text-black text-lg sm:text-lg  mb-4 mt-3 ml-4'>All Categories</div> */}
 
                         <div className="mb-4">
                             <div className="flex items-center cursor-pointer" onClick={toggleDropdown}>
@@ -66,7 +74,7 @@ const ProductDetails = ({ name }: any) => {
                             </div>
                             {isDropdownOpen && (
                                 <div className="mt-2 sm:mt-0">
-                                    {subCategories.map((val: any) => (
+                                    {currentSubcategories.map((val: any) => (
                                         <div key={val} className="py-2 pl-4 hover:bg-[#d9d9d9] hover:text-black transition duration-300 ease-in-out rounded-md text-gray-700 cursor-pointer">{val}</div>
                                     ))}
                                 </div>
@@ -123,7 +131,7 @@ const ProductDetails = ({ name }: any) => {
                         </div>
                         <div className='text-black text-lg sm:text-lg mt-3'>Recently Viewed</div>
                         <div className="border-b border-black w-full mb-5"></div>
-                        <div className="flex flex-wrap">
+                        <div className="flex">
                             <Cards scrapImage={scrap1} scrapTitle={"Electric Scrap"} classname={"1/3"} />
                             <Cards scrapImage={scrap1} scrapTitle={"Electric Scrap"} classname={"1/3"} />
                             <Cards scrapImage={scrap1} scrapTitle={"Electric Scrap"} classname={"1/3"} />
