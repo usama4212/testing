@@ -1,3 +1,4 @@
+
 "use client"
 import AuctionEnd from '@/components/AuctionEnd'
 import CardsCollection from '@/components/CardsCollection'
@@ -8,8 +9,10 @@ import ScrapApp from '@/components/ScrapApp'
 import ScrapSell from '@/components/ScrapSell'
 import React from 'react'
 
+
 const page = () => {
   return (
+
     <div className='bg-[#e9e9e9]'>
       <ImageSlider />
       <Categories />
@@ -23,6 +26,7 @@ const page = () => {
       <Footer/>
     </div>
   )
+
 }
 
 export default page
