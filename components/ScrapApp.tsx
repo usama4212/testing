@@ -5,14 +5,13 @@ import gradient from "@/assets/scrap-gradient.png";
 import downloadButton from "@/assets/download-button.svg";
 import appleIcon from "@/assets/apple-icon.svg";
 import playstoreIcon from "@/assets/playstore-icon.svg";
-import flower from "@/assets/flower.svg";
 
 const ScrapApp = () => {
     return (
         <div>
             <div className="text-white bg-no-repeat bg-cover pb-8 mt-36" style={{ backgroundImage: `url(${gradient.src})` }}>
                 <div className="container mx-auto flex flex-col lg:flex-row items-center">
-                    <div className="relative z-10 lg:w-1/2">
+                    <div className="relative z-10 w-full md:w-1/2 pr-4 sm:pr-0">
                         <Image src={mobileApp} alt="Left Image" className="w-full object-cover object-top ml-2 sm:ml-0 -mt-12 lg:-mt-24 " />
                     </div>
 

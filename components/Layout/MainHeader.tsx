@@ -5,7 +5,7 @@ import SubHeader from "@/components/Layout/SubHeader";
 export default function MainHeader() {
   return (
     <>
-      <div className="bg-white ">
+      <div className="bg-white mb-10">
         <Navbar />
         <SubHeader />
       </div>{" "}

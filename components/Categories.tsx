@@ -22,6 +22,7 @@ const Categories = () => {
     const categoryName = ["Electronics", "Fashion", "Home & Garden", "Automotive", "Collectibles & Art", "Toys & Hobbies", "Sports & Leisure", "Movies & Music", "Health & Beauty", "Baby Products", "Pet Supplies", "Others"]
 
     const categories = categoryImage.map((val, i) => ({ id: i + 1, image: val, title: categoryName[i] }));
+    
 
     return (
         <div>

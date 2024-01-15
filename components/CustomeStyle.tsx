@@ -5,7 +5,7 @@ export const customStyles = {
         color: state.isSelected ? '#F0C30F' : 'black',
         backgroundColor: state.isSelected ? '#423604' : 'transparent',
         ':hover': {
-            backgroundColor: '#423609',
+            backgroundColor: '#E9E9E9',
             color: 'black'
         }
     }),
