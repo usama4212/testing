@@ -7,12 +7,16 @@ import defaultPassword from "@/assets/defaultPassword.svg";
 import eye from "@/assets/eye.svg";
 import eyeSlash from "@/assets/eye-slash.svg";
 import activePassword from "@/assets/activePassword.svg";
+import { useRouter } from "next/navigation";
 
 const ResetPassword = () => {
+
     const [formData, setFormData] = useState({ password: '', confirmPassword: '' });
     const [formDataError, setFormDataError] = useState<any>({})
     const [showPasswords, setShowPasswords] = useState({password: false, confirmPassword: false});
     const [passwordMatch, setPasswordMatch] = useState("")
+
+    const navigate = useRouter()
 
 
     const handleEyeToggle = (passwordKey: keyof typeof showPasswords) => {
@@ -25,8 +29,8 @@ const ResetPassword = () => {
         setFormData(pre => ({ ...pre, [name]: value }));
         setFormDataError((pre: any) => ({ ...pre, [name]: "" }));
 
-        if (name == "confirmPassword") setPasswordMatch(formData.password !== value && formData.password !== "" && value !== "" ? "Password Doesn't Match" : "")
-        if (name == "password") setPasswordMatch(formData.confirmPassword !== value && formData.confirmPassword !== "" && value !== "" ? "Password Doesn't Match" : "")
+        if (name == "confirmPassword") setPasswordMatch(formData.password !== value && formData.password !== "" && value !== "" ? "Passwords do not match" : "")
+        if (name == "password") setPasswordMatch(formData.confirmPassword !== value && formData.confirmPassword !== "" && value !== "" ? "Passwords do not match" : "")
 
     };
 
@@ -48,9 +52,14 @@ const ResetPassword = () => {
         const formValues = Object.values(formData);
         if (formValues.includes("") || passwordMatch !== "") {
             formDataValidations();
-            return;
         }
+        else{
+            navigate.push("/login")
+        }
+        
     }
+
+    
     return (
         <AuthLayout
             title="Reset your Password"
@@ -68,14 +77,14 @@ const ResetPassword = () => {
                 </div>
 
                 <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPasswords.password ? 'text' : 'password'} placeholder="Password" name="password" 
-                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('password')} icon={showPasswords.password ? eye : eyeSlash}
+                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('password')} icon={showPasswords.password ? eye : eyeSlash} fieldData={formDataError.password}
                 />
-                <div className="text-red-500 text-sm h-[30px]">{formDataError?.password}</div>
+                <div className="text-red-500 text-sm h-[30px] mx-2">{formDataError?.password}</div>
 
                 <FieldInput DefaultImage={defaultPassword} activeImage={activePassword} type={showPasswords.confirmPassword ? 'text' : 'password'} placeholder="Confirm Password" name="confirmPassword" 
-                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('confirmPassword')} icon={showPasswords.confirmPassword ? eye : eyeSlash}
+                formData={formData} onChange={handleChange} onClick={() => handleEyeToggle('confirmPassword')} icon={showPasswords.confirmPassword ? eye : eyeSlash} fieldData={formDataError.confirmPassword}
                 />
-                <div className="text-red-500 text-sm h-[30px]">{formDataError?.confirmPassword}{passwordMatch}</div>
+                <div className="text-red-500 text-sm h-[30px] mx-2">{formDataError?.confirmPassword?.replace(/([a-z])([A-Z])/g, '$1 $2')}{passwordMatch}</div>
             </div>
         </AuthLayout>
     )

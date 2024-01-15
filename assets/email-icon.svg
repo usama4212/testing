@@ -1,0 +1,28 @@
+<svg width="31" height="26" viewBox="0 0 31 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="svg-1085277172_900">
+<g id="Clip path group">
+<mask id="mask0_459_5001" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="1" width="31" height="25">
+<g id="svg-1085277172_900_clip0_2_2123">
+<path id="Vector" d="M30.6493 1.02051H0.599365V25.0205H30.6493V1.02051Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0_459_5001)">
+<g id="Group">
+<g id="Mask group">
+<mask id="mask1_459_5001" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="1" width="31" height="25">
+<g id="Group_2">
+<path id="Vector_2" d="M30.6493 1.02051H0.599365V25.0205H30.6493V1.02051Z" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask1_459_5001)">
+<g id="Group_3">
+<path id="Vector_3" d="M26.9657 23.3143H4.28145C3.14562 23.3143 2.21924 22.3895 2.21924 21.2556V4.78534C2.21924 3.65141 3.14562 2.72656 4.28145 2.72656H26.9657C28.1015 2.72656 29.0279 3.65141 29.0279 4.78534V21.2556C29.0279 22.3895 28.1015 23.3143 26.9657 23.3143Z" stroke="black" stroke-width="1.5" stroke-miterlimit="10"/>
+<path id="Vector_4" d="M2.94507 4.25391L15.6244 13.0198L28.3038 4.25391" stroke="black" stroke-width="1.5" stroke-miterlimit="10"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>

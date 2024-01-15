@@ -20,11 +20,13 @@ import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
 import { useRouter } from "next/navigation";
+
 import {
   emailRegex,
   phoneNumberRegex,
   saudiPhoneNumberRegex,
 } from "@/components/Constants";
+
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -35,11 +37,13 @@ const LoginPage = () => {
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phoneError, setPhoneError] = useState("");
+
   const [inputsError, setInputsError] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
+
   const setValue = (e: any) => {
     const { value, name } = e.target;
     if (name === "phone") {
@@ -65,6 +69,7 @@ const LoginPage = () => {
 
   const submitHandler = () => {
     if (loginOption == "phone") {
+
       if (!saudiPhoneNumberRegex.test(phone)) {
         setPhoneError("Please enter a valid phone number.");
         return;

@@ -33,11 +33,13 @@ const Input = ({
         <input
           type={type}
           name={name}
+
           className={`focus:border ${
             fieldData ? "focus:border-red-500" : "focus:border-gray-400"
           }  focus:outline-none  p-4 ps-10 w-full bg-white rounded-[10px] border-[1px] ${
             fieldData ? "border-red-500" : ""
           }`}
+
           placeholder={placeholder}
           onChange={onChange}
           value={value}

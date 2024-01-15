@@ -5,17 +5,35 @@ import envelope from "@/assets/envelope.svg";
 import phone from "@/assets/phone.svg";
 import moment from "moment";
 
-const Otp = ({ submitHandler, page }: OtpProps) => {
+const Otp = ({ page, pageName }: OtpProps) => {
   const [code, setCode] = useState(["", "", "", ""]);
   const [counter, setCounter] = useState<any>(120);
+  const [isComplete, setIsComplete] = useState(false);
+  const [emptyCodeError, setEmptyCodeError] = useState("")
   const inputRefs = useRef<any>([]);
   const formattedTime = moment.utc(counter * 1000).format("mm:ss");
 
-  // const submitHandler = () => { };
+  const submitHandler = () => {
+    if (isComplete) {
+      pageName("reset")
+    }
+    else {
+      setEmptyCodeError("Please Fill The Code")
+    }
+
+  };
+
+
+  useEffect(() => {
+    const allFilled = code.every(digit => digit !== '');
+    setIsComplete(allFilled);
+  }, [code]);
+
 
   const handleChange = (index: any, value: any) => {
     const newCode = [...code];
     const digit = value.replace(/[^0-9]/g, "");
+    setEmptyCodeError("")
 
     newCode[index] = digit;
     setCode(newCode);
@@ -36,10 +54,7 @@ const Otp = ({ submitHandler, page }: OtpProps) => {
   const handlePaste = (e: any) => {
     e.preventDefault();
     const pasteData = e.clipboardData.getData("text/plain");
-    const digits = pasteData
-      .replace(/[^0-9]/g, "")
-      .split("")
-      .slice(0, 4);
+    const digits = pasteData.replace(/[^0-9]/g, "").split("").slice(0, 4);
 
     const newCode = [...code];
     digits.forEach((digit: any, index: any) => {
@@ -66,19 +81,18 @@ const Otp = ({ submitHandler, page }: OtpProps) => {
     }
   }, [counter]);
 
+
   return (
     <>
       <AuthLayout
         title={page == "email" ? "Email OTP" : "Number OTP"}
-        subtitle={`Please check your ${
-          page == "email" ? "email" : "SMS"
-        } for OTP`}
+        subtitle={`Please check your ${page == "email" ? "email" : "SMS"} for OTP`}
         picture={page == "email" ? envelope : phone}
         submitHandler={submitHandler}
         buttonText="Continue"
       >
-        <div className="w-full max-h-[574px] flex-col sm:items-center md:items-center lg:items-start justify-start inline-flex">
-          <div className="text-black text-4xl font-semibold leading-[48px]">
+        <div className="w-full max-h-[574px] flex-col sm:items-center md:items-center justify-center inline-flex">
+          <div className="text-black text-4xl font-semibold leading-[48px] flex text-center">
             Check Your {page == "email" ? "Email" : "Mobile"}{" "}
           </div>
           <div className="font-sans text-base sm:text-lg lg:text-lg leading-5 mt-3">
@@ -99,12 +113,16 @@ const Otp = ({ submitHandler, page }: OtpProps) => {
               />
             ))}
           </div>
+          {emptyCodeError && <div className="mx-auto flex flex-wrap justify-center text-red-600 text-[14px] mt-3">
+            {emptyCodeError}
+          </div>
+          }
           <div className="mx-auto flex flex-wrap justify-center text-gray-500 mt-14">
             {formattedTime}
           </div>
           <div className="mx-auto flex flex-wrap justify-center mt-2 mb-14">
-            Didnt get a code?{" "}
-            <span className="font-bold px-1 cursor-pointer">Resend</span>
+            Didn't get a code?{" "}
+            <span onClick={()=>setCounter(120)} className="font-bold px-1 cursor-pointer">Resend</span>
           </div>
         </div>
       </AuthLayout>
@@ -112,7 +130,8 @@ const Otp = ({ submitHandler, page }: OtpProps) => {
   );
 };
 interface OtpProps {
-  submitHandler: () => void;
+  // submitHandler: () => void;
   page: string;
+  pageName: any;
 }
 export default Otp;
