@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { GoogleOAuthProvider } from "@react-oauth/google";
+import MainHeader from "@/components/Layout/MainHeader";
 
 const poppins = Poppins({ weight: "400", subsets: ["latin"], display: "swap" });
 
@@ -18,7 +19,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <GoogleOAuthProvider clientId="152989153330-comtntqkrd34c872cbcmqrn35rdqp4aq.apps.googleusercontent.com">
-        <body className={poppins.className}>{children}</body>
+        <body className={poppins.className}><div className="bg-gray-200"><MainHeader/>{children}</div></body>
       </GoogleOAuthProvider>
     </html>
   );

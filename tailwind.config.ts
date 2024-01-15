@@ -16,8 +16,12 @@ const config: Config = {
       colors: {
         primary: "#FFC700",
       },
+      screens:{
+        xmd: '870px',
+      }
     },
   },
+  darkMode: "class",
   plugins: [],
 };
 export default config;

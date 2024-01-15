@@ -20,6 +20,11 @@ import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
 import { useRouter } from "next/navigation";
+import {
+  emailRegex,
+  phoneNumberRegex,
+  saudiPhoneNumberRegex,
+} from "@/components/Constants";
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -30,13 +35,15 @@ const LoginPage = () => {
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phoneError, setPhoneError] = useState("");
-  const [inputsError, setInputsError] = useState("");
-  const router = useRouter()
+  const [inputsError, setInputsError] = useState({
+    email: "",
+    password: "",
+  });
+  const router = useRouter();
   const setValue = (e: any) => {
     const { value, name } = e.target;
     if (name === "phone") {
       console.log(phone);
-      const phoneNumberRegex = /^[+0-9][0-9]*$/;
       if (!phoneNumberRegex.test(value) && value.length > 0) {
         setPhoneError("Invalid Phone Number");
       } else {
@@ -45,7 +52,7 @@ const LoginPage = () => {
       setPhone(value);
     } else {
       console.log(inputs);
-      setInputsError("");
+      setInputsError((prev) => ({ ...prev, [name]: "" }));
       setInputs((prev) => {
         return { ...prev, [name]: value };
       });
@@ -58,32 +65,58 @@ const LoginPage = () => {
 
   const submitHandler = () => {
     if (loginOption == "phone") {
-      const saudiPhoneNumberRegex = /^(?:\+?966|00966|0)?\s?5[0-9]{8}$/;
       if (!saudiPhoneNumberRegex.test(phone)) {
         setPhoneError("Please enter a valid phone number.");
         return;
       } else {
-        router.push("/login/verify")
+        router.push("/login/verify");
         return;
       }
     } else if (loginOption == "email") {
       if (inputs.email && inputs.password) {
+        if (!emailRegex.test(inputs.email)) {
+          setInputsError((prev) => ({
+            ...prev,
+            email: "Please write a correct email",
+          }));
+          return;
+        }
         alert("email and password");
+      } else if (inputs.email) {
+        if (!emailRegex.test(inputs.email)) {
+          setInputsError((prev) => ({
+            ...prev,
+            email: "Please write a correct email",
+          }));
+          return;
+        }
+        setInputsError((prev) => ({
+          ...prev,
+          password: "Please fill password field",
+        }));
+        return;
+      } else if (inputs.password) {
+        setInputsError((prev) => ({
+          ...prev,
+          email: "Please fill email field",
+        }));
+        return;
       } else {
-        setInputsError("Please fill all details");
+        setInputsError((prev) => ({
+          email: "Please fill email field",
+          password: "Please fill password field",
+        }));
         return;
       }
     }
     alert("form submitted");
   };
 
-  const otpSubmitHandler = () => {};
-
   return (
     <>
       <AuthLayout
-        title="Welcome"
-        subtitle="You can connect with thousands of Buyers and Sellers"
+        title="Welcome Back to Scrapyard!"
+        subtitle="Log in to your account to continue buying, selling scrap, and auctioning products."
         picture={loginOption == "phone" ? signImage : loginImage}
         submitHandler={submitHandler}
         buttonText="Sign in"
@@ -107,41 +140,51 @@ const LoginPage = () => {
                   name="phone"
                   placeholder="+9661233453"
                   onChange={setValue}
+                  error={phoneError}
                 />
 
-                <span className="text-red-500 text-sm px-4  ">
+                <span className="text-red-500 text-xs px-2  ">
                   {phoneError}
                 </span>
               </div>
             )}
             {loginOption == "email" && (
               <div className="space-y-3">
-                <Input
-                  DefaultImage={emailIcon2}
-                  activeImage={activeEmail}
-                  type="email"
-                  name="email"
-                  value={inputs.email}
-                  placeholder="Email address"
-                  onChange={setValue}
-                />
-                <Input
-                  DefaultImage={passwordIcon}
-                  activeImage={activePassword}
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  value={inputs.password}
-                  placeholder="Password"
-                  onChange={setValue}
-                  icon={showPassword ? eye : eyeOff}
-                  onClick={() => {
-                    setShowPassword(!showPassword);
-                  }}
-                />
-                <div className="">
-                  <span className="text-red-500 text-sm px-4 float-left  ">
-                    {inputsError}
+                <div className="pb-2">
+                  <Input
+                    DefaultImage={emailIcon2}
+                    activeImage={activeEmail}
+                    type="text"
+                    name="email"
+                    value={inputs.email}
+                    placeholder="Email address"
+                    onChange={setValue}
+                    fieldData={inputsError.email}
+                  />
+                  <span className="text-red-500 text-xs px-2  float-left  ">
+                    {inputsError.email}
                   </span>
+                </div>
+                <div className="">
+                  <Input
+                    DefaultImage={passwordIcon}
+                    activeImage={activePassword}
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    value={inputs.password}
+                    placeholder="Password"
+                    onChange={setValue}
+                    icon={showPassword ? eye : eyeOff}
+                    onClick={() => {
+                      setShowPassword(!showPassword);
+                    }}
+                    fieldData={inputsError.password}
+                  />
+                  <span className="text-red-500 text-xs px-2  float-left  ">
+                    {inputsError.password}
+                  </span>
+                </div>
+                <div className="">
                   <Link
                     href="/forget"
                     className="text-slate-950 text-xs font-medium leading-tight float-right hover:text-primary"
@@ -159,27 +202,29 @@ const LoginPage = () => {
               <div className="w-[45%] border my-3 ml-[11px]"></div>
             </div>
             {/* Continue with gmail button */}
-            <div className="space-y-3">
-              <Button
-                buttonText="Continue with Gmail"
-                icon={gmailIcon}
-                clickHandler={(e) => {
-                  e.preventDefault();
-                  loginWithGoogle();
-                }}
-                style={{}}
-              />
-              {/* Continue with Apple */}
-              <Button
-                buttonText="Continue with Apple"
-                icon={appleIcon}
-                clickHandler={(e) => {
-                  e.preventDefault();
-                }}
-                style={{}}
-              />
-              {/* Continue with Email or Phone */}
-              {loginOption == "phone" ? (
+
+            {loginOption == "phone" && (
+              <div className="space-y-3">
+                <Button
+                  buttonText="Continue with Gmail"
+                  icon={gmailIcon}
+                  clickHandler={(e) => {
+                    e.preventDefault();
+                    loginWithGoogle();
+                  }}
+                  style={{}}
+                />
+                {/* Continue with Apple */}
+                <Button
+                  buttonText="Continue with Apple"
+                  icon={appleIcon}
+                  clickHandler={(e) => {
+                    e.preventDefault();
+                  }}
+                  style={{}}
+                />
+                {/* Continue with Email or Phone */}
+
                 <Button
                   buttonText="Sign in with Email"
                   icon={emailIcon}
@@ -189,18 +234,19 @@ const LoginPage = () => {
                   }}
                   style={{}}
                 />
-              ) : (
-                <Button
-                  buttonText="Sign in with Phone"
-                  icon={phoneImage}
-                  clickHandler={(e) => {
-                    e.preventDefault();
-                    setLoginOption("phone");
-                  }}
-                  style={{}}
-                />
-              )}
-            </div>
+              </div>
+            )}
+            {loginOption == "email" && (
+              <Button
+                buttonText="Sign in with Phone"
+                icon={phoneImage}
+                clickHandler={(e) => {
+                  e.preventDefault();
+                  setLoginOption("phone");
+                }}
+                style={{}}
+              />
+            )}
           </div>
         </div>
       </AuthLayout>
