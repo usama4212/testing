@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import sellNow from "@/assets/sell-now.png";
@@ -15,7 +16,7 @@ const ScrapSell = () => {
         return () => window.removeEventListener('resize', handleResize)
     }, []);
     return (
-        <div className=' mt-24 min-h-[185px]'>
+        <div className='max-w-7xl mx-auto mt-24 min-h-[185px]'>
             <div className="container mx-auto my-8 relative">
                 <div className='flex'>
                     {view &&

@@ -1,21 +1,39 @@
 "use client";
 /* eslint-disable react/no-unescaped-entities */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import CategoriesDropDown from "../UI/CategoriesDropdown";
 import PriceRangeDropdown from "../UI/PriceRangeDropdown";
 
 export default function SubHeader() {
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const [showPriceDropdown, setShowPriceDropdown] = useState(false);
+  const [slectedCategory, setSelecetedCategory] = useState("Categories");
+  const [slectedPrice, setSelecetedPrice] = useState("Price Range");
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      const targetDiv = document.getElementById("dropDownDiv"); 
+      if (targetDiv && !targetDiv.contains(event.target)) {
+        setShowCategoryDropdown(false);
+        setShowPriceDropdown(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <>
       {/*  Search Header */}
-      <div className="flex mx-auto max-w-7xl px-2 xmd:px-6 lg:px-8 py-3 h-[91px]  ">
-        <div className="flex flex-1 items-center justify-center xmd:items-stretch xmd:justify-center  ">
+      <div className="flex mx-auto max-w-7xl  py-3 h-[91px]  ">
+        <div className="flex flex-1 items-center justify-center   ">
           {/* Form */}
           <div className="flex items-center w-full">
             <label htmlFor="simple-search" className="sr-only">
               Search
             </label>
-            <div className="relative w-[40%]">
+            <div className="relative w-[70%] md:w-[40%] lg:w-[60%]">
               <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                 <svg
                   className="w-4 h-4"
@@ -34,20 +52,28 @@ export default function SubHeader() {
               <input
                 type="text"
                 id="simple-search"
-                className="  text-gray-900 text-sm rounded-lg   block w-[90%] ps-10 p-2.5  bg-white outline-none focus:outline-none "
+                className="  text-gray-900 text-sm  border-b   block w-[100%]  ps-10 py-2.5  bg-white outline-none focus:outline-none "
                 placeholder="Search for auctions..."
                 required
               />
             </div>
-            <div className="hidden md:flex">
-              <CategoriesDropDown />
-              <PriceRangeDropdown />
+            <div className="hidden md:flex" id="dropDownDiv">
+              <CategoriesDropDown
+                showCategoryDropdown={showCategoryDropdown}
+                setShowCategoryDropdown={setShowCategoryDropdown}
+                setShowPriceDropdown={setShowPriceDropdown}
+              />
+              <PriceRangeDropdown
+                showPriceDropdown={showPriceDropdown}
+                setShowPriceDropdown={setShowPriceDropdown}
+                setShowCategoryDropdown={setShowCategoryDropdown}
+              />
             </div>
             {/* Search Button */}
 
             <button
               type="submit"
-              className=" ml-4  text-black hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-[10px]  py-2 text-base font-medium  "
+              className=" ml-4  text-black hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-md py-2 text-base font-medium  "
             >
               <span className="">Search</span>
             </button>

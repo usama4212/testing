@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { onlyNumberRegex } from "../Constants";
 
-export default function PriceRangeDropdown() {
-  const [showDropdown, setShowDropdown] = useState(false);
+export default function PriceRangeDropdown({showPriceDropdown, setShowPriceDropdown , setShowCategoryDropdown}: any) {
+  // const [showPriceDropdown, setShowPriceDropdown] = useState(false);
   const [selectedRange, setSelecetedRange] = useState("");
   const [slectedOption, setSelecetedOption] = useState("Price Range");
   const [min, setMin] = useState("");
@@ -52,15 +52,17 @@ export default function PriceRangeDropdown() {
         <button
           type="button"
           onClick={() => {
-            setShowDropdown(!showDropdown);
-            setRotate(!rotate);
+            if(!showPriceDropdown){
+              setShowCategoryDropdown(false)
+            }
+            setShowPriceDropdown(!showPriceDropdown);
           }}
           className="w-[200px]  border-l-2 py-1 relative"
         >
           {slectedOption}
           <svg
             className={`mx-1 w-4 h-4 inline ${
-              rotate ? "" : "rotate-180"
+              showPriceDropdown ? "" : "rotate-180"
             } transition duration-500 absolute right-2 top-1/2 transform -translate-y-1/2`}
             viewBox="0 0 20 21"
             fill="none"
@@ -75,8 +77,7 @@ export default function PriceRangeDropdown() {
             />
           </svg>
         </button>
-        {showDropdown && (
-
+        {showPriceDropdown && (
           <ul className="dropdown-content absolute bg-white text-gray-900 border pt-1 w-52">
             <li className="px-4 py-2 flex space-x-2">
               <input
@@ -132,8 +133,7 @@ export default function PriceRangeDropdown() {
                     className=" hover:bg-gray-200  cursor-pointer py-2 px-4 block whitespace-no-wrap"
                     onClick={() => {
                       setSelecetedOption(category.name);
-                      setShowDropdown(!showDropdown);
-                      setRotate(!rotate);
+                      setShowPriceDropdown(!showPriceDropdown);
                     }}
                   >
                     {category.name}

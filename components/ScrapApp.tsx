@@ -8,14 +8,20 @@ import appleIcon from "@/assets/apple-icon.svg";
 import playstoreIcon from "@/assets/playstore-icon.svg";
 
 const ScrapApp = () => {
-
-    return (
-        <div>
-            <div className="text-white bg-no-repeat bg-cover pb-8 mt-36" style={{ backgroundImage: `url(${gradient.src})` }}>
-                <div className="container mx-auto flex flex-col lg:flex-row items-center">
-                    <div className="relative z-10 w-full md:w-1/2 pr-4 sm:pr-0">
-                        <Image src={mobileApp} alt="Left Image" className="w-full object-cover object-top ml-2 sm:ml-0 -mt-12 lg:-mt-24 " />
-                    </div>
+  return (
+    <div>
+      <div
+        className="text-white bg-no-repeat bg-cover pb-8 mt-36 "
+        style={{ backgroundImage: `url(${gradient.src})` }}
+      >
+        <div className="container mx-auto max-w-7xl flex flex-col lg:flex-row items-center">
+          <div className="relative z-10 w-full md:w-1/2 pr-4 sm:pr-0">
+            <Image
+              src={mobileApp}
+              alt="Left Image"
+              className="w-full object-cover object-top ml-2 sm:ml-0 -mt-12 lg:-mt-24 "
+            />
+          </div>
           <div className="lg:ml-8 mt-8 lg:mt-0 text-center lg:text-left">
             <div className="text-[32px] lg:text-[52px] font-extrabold leading-[36.58px] lg:leading-[57.87px] text-black">
               Saudi's No. 1

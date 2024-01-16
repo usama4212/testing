@@ -5,10 +5,10 @@ import clock from "@/assets/clock.svg";
 
 const CategoryCard = ({ view, index, description }: any) => {
     return (
-        <div key={index} className={`bg-white rounded-md flex ${view === 'list' ? 'flex-row' : 'flex-col'} w-full border border-gray-400 mb-3`}>
-            <div className={`${view === 'list' ? '' : 'w-full'}`}>
-                <div><Image
-                    className="object-cover w-full"
+        <div key={index} className={`bg-white rounded-[20px] flex ${view === 'list' ? 'flex-row' : 'flex-col'} w-full border border-gray-400 mb-3`}>
+            <div className={`${view === 'list' ? '' : 'w-full'} `}>
+                <div className=''><Image
+                    className="object-cover w-full rounded-t-[20px]"
                     src={categoryCard1}
                     alt="Card Image"
                 />

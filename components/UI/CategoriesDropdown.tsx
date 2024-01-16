@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 
-export default function CategoryDropdown() {
-  const [showDropdown, setShowDropdown] = useState(false);
+export default function CategoryDropdown({showCategoryDropdown, setShowCategoryDropdown , setShowPriceDropdown}: any ) {
+  // const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [slectedCategory, setSelecetedCategory] = useState("");
   const [slectedOption, setSelecetedOption] = useState("Categories");
-  const [rotate, setRotate] = useState(false);
   const categories = [
     {
       name: "Electronics",
@@ -129,19 +128,21 @@ export default function CategoryDropdown() {
   ];
   return (
     <>
-      <div className="dropdown inline-block relative ">
+      <div className="dropdown inline-block relative " >
         <button
           type="button"
           onClick={() => {
-            setShowDropdown(!showDropdown);
-            setRotate(!rotate);
+            if(!showCategoryDropdown){
+              setShowPriceDropdown(false)
+            }
+            setShowCategoryDropdown(!showCategoryDropdown);
           }}
           className="w-[320px]  border-l-2 py-1 relative "
         >
           {slectedOption}
           <svg
             className={`mx-1 w-4 h-4 inline ${
-              rotate ? "" : "rotate-180"
+              showCategoryDropdown ? "" : "rotate-180"
             } transition duration-500 absolute right-2 top-1/2 transform -translate-y-1/2`}
             viewBox="0 0 20 21"
             fill="none"
@@ -156,8 +157,7 @@ export default function CategoryDropdown() {
             />
           </svg>
         </button>
-        {showDropdown && (
-
+        {showCategoryDropdown && (
           <ul className="dropdown-content absolute bg-white z-10 text-gray-900 border pt-1 w-[320px]">
             {categories.map((category, index) => {
               return (
@@ -175,8 +175,7 @@ export default function CategoryDropdown() {
                     className=" hover:bg-gray-200 cursor-pointer py-2 px-4 block whitespace-no-wrap"
                     onClick={() => {
                       setSelecetedOption(category.name);
-                      setShowDropdown(!showDropdown);
-                      setRotate(!rotate);
+                      setShowCategoryDropdown(!showCategoryDropdown);
                     }}
                   >
                     {category.name}
@@ -190,7 +189,7 @@ export default function CategoryDropdown() {
                             className="w-52"
                             onClick={() => {
                               setSelecetedOption(sub);
-                              setShowDropdown(!showDropdown);
+                              setShowCategoryDropdown(!showCategoryDropdown);
                             }}
                           >
                             <span className="hover:bg-gray-200  py-2 px-4 block cursor-pointer whitespace-no-wrap">

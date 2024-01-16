@@ -12,7 +12,7 @@ export default function Navbar2() {
   return (
     <>
       <nav className="bg-primary">
-        <div className="mx-auto max-w-7xl px-2 xmd:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl ">
           <div className="relative flex h-16 items-center justify-between">
             <div className="absolute inset-y-0 left-0 flex items-center xmd:hidden">
               {/* Mobile menu button*/}
@@ -135,7 +135,7 @@ export default function Navbar2() {
               </div>
             </div>
             {/* Profile dropdown and notification menu */}
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-5 sm:pr-0">
+            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-5 sm:pr-0 min-w-[118px]">
               {isLogin ? (
                 <>
                   <button

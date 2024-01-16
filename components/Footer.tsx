@@ -10,7 +10,7 @@ import Image from 'next/image';
 const Footer = () => {
     return (
         <footer className="bg-gradient-to-b from-white to-[#ededed]/90 text-black">
-            <div className="container mx-auto flex flex-col lg:flex-row justify-between items-center lg:py-32 py-16">
+            <div className="container mx-auto max-w-7xl flex flex-col lg:flex-row justify-between items-center lg:py-32 py-16">
                 <div className="flex flex-col items-center lg:items-start mb-8 lg:mb-0">
                     <div className="text-2xl font-semibold mb-4 text-black">Scrapyard</div>
                     <div className="flex space-x-4 items-center mt-2">
