@@ -1,12 +1,43 @@
 import Image from "next/image";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import arrow from "@/assets/arrow.svg";
 import cardPic from "@/assets/laptop.jpeg";
+import moment from 'moment/moment';
 
 
 import Card from "./UI/Card";
 
 const CardsCollection = ({ title }: any) => {
+  const [bidTime, setBidTime] = useState(86400)
+  const [days, setDays] = useState<number | string>("0");
+  const [hours, setHours] = useState<number | string>("0");
+  const [minutes, setMinutes] = useState<number | string>("0");
+  const [seconds, setSeconds] = useState<number | string>("0");
+
+  useEffect(() => {
+    const diffTime = bidTime;
+    let duration = moment.duration(diffTime * 1000, "milliseconds");
+    const interval = 1000;
+
+    const timerID = setInterval(() => {
+      if (duration.asMilliseconds() <= 0) {
+        setDays("0");
+        setHours("0");
+        setMinutes("0");
+        setSeconds("0");
+      } else {
+        duration = moment.duration(duration.asMilliseconds() - interval, "milliseconds");
+
+        setDays(duration.days());
+        setHours(duration.hours());
+        setMinutes(duration.minutes());
+        setSeconds(duration.seconds());
+      }
+    }, interval);
+
+    return () => clearInterval(timerID);
+  }, [bidTime]);
+
   return (
     <div>
       <div className="max-w-7xl mx-auto">
@@ -28,13 +59,25 @@ const CardsCollection = ({ title }: any) => {
             <>
 
               <Card cardImage={cardPic}
-                scrapTitle={"IPhone 15 Pro Max 256GB"} />
+                scrapTitle={"IPhone 15 Pro Max 256GB"} days={days}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds} />
               <Card cardImage={cardPic}
-                scrapTitle={"Dell Latitude 5480 Dual Core"} />
+                scrapTitle={"Dell Latitude 5480 Dual Core"}  days={days}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}/>
               <Card cardImage={cardPic}
-                scrapTitle={"Toyota Hilux 2018"} />
+                scrapTitle={"Toyota Hilux 2018"}  days={days}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}/>
               <Card cardImage={cardPic}
-                scrapTitle={"Samsun Galaxy S22 Ultra"} />
+                scrapTitle={"Samsun Galaxy S22 Ultra"}  days={days}
+                hours={hours}
+                minutes={minutes}
+                seconds={seconds}/>
 
             </>
           </div>

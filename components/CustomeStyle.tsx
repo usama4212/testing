@@ -2,14 +2,14 @@ export const customStyles = {
     option: (provided: any, state: any) => ({
         ...provided,
         // borderBottom: '1px dotted gray',
-        color: state.isSelected ? '#F0C30F' : 'black',
-        backgroundColor: state.isSelected ? '#423604' : 'transparent',
+        color: state.isSelected ? '#black' : 'black',
+        backgroundColor: state.isSelected ? '#E9E9E9' : 'transparent',
         ':hover': {
             backgroundColor: '#E9E9E9',
             color: 'black'
         }
     }),
-    input: (provided: any) => ({ ...provided, color: '#F0C30F !important' }),
+    input: (provided: any) => ({ ...provided, color: 'black !important' }),
 
     placeholder: (provided: any) => ({
         ...provided,
@@ -20,9 +20,9 @@ export const customStyles = {
 
     menu: (provided: any) => ({
         ...provided,
-        backgroundColor: '#F0C30F',
-        border: '1px solid #F0C30F',
-        color: "#F0C30F",
+        backgroundColor: 'white',
+        border: '1px solid gray',
+        color: "#black",
         zIndex: "10",
         opacity: "1",
         textAlign: "left",

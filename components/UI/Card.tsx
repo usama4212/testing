@@ -2,7 +2,7 @@ import Image from "next/image";
 import React from "react";
 import clock from "@/assets/clock.svg";
 
-export default function Card({ cardImage, scrapTitle, classname }: any) {
+export default function Card({ cardImage, scrapTitle, classname , days,hours, minutes, seconds}: any) {
   return (
     <div className="relative  mx-auto my-2 lg: flex w-full max-w-[300px] flex-col overflow-hidden rounded-[20px] border border-gray-100 bg-white shadow-md">
       <a
@@ -27,7 +27,7 @@ export default function Card({ cardImage, scrapTitle, classname }: any) {
           </p>
           <div className="flex items-center bg-primary py-1 px-2 rounded-md">
             <Image className="w-[14px]  " src={clock} alt="Card Image" />
-            <div className=" ml-1 text-[14px] flex items-center">04h 27m 40s</div>
+            <div className=" ml-1 text-[14px] flex items-center">{hours}h {minutes}m {seconds}s</div>
           </div>
         </div>
         <button

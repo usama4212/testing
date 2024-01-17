@@ -15,7 +15,7 @@ const ScrapApp = () => {
         style={{ backgroundImage: `url(${gradient.src})` }}
       >
         <div className="container mx-auto max-w-7xl flex flex-col lg:flex-row items-center">
-          <div className="relative z-10 w-full md:w-1/2 pr-4 sm:pr-0">
+          <div className="relative z-10 w-full md:w-1/2 pr-4 sm:pr-4">
             <Image
               src={mobileApp}
               alt="Left Image"

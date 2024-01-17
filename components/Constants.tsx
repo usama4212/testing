@@ -136,7 +136,44 @@ export const categories = [
     },
   ];
 
-
+  export const prices = [
+    {
+      name: "0 to 500",
+      subcategory: [],
+    },
+    {
+      name: "500 to 1000",
+      subcategory: [],
+    },
+    {
+      name: "1000 to 1500",
+      subcategory: [],
+    },
+    {
+      name: "1500 to 2000",
+      subcategory: [],
+    },
+    {
+      name: "2000 to 2500",
+      subcategory: [],
+    },
+    {
+      name: "2500 to 3000",
+      subcategory: [],
+    },
+    {
+      name: "3000 to 3500",
+      subcategory: [],
+    },
+    {
+      name: "3500 to 4000",
+      subcategory: [],
+    },
+    {
+      name: "4000 to 5000",
+      subcategory: [],
+    },
+  ];
 
 
 

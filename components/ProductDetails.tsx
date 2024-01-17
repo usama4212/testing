@@ -6,7 +6,6 @@ import Image from "next/image";
 import CategoryCard from "./CategoryCard";
 import laptop from "@/assets/laptop.jpeg";
 import ScrapApp from "./ScrapApp";
-import Footer from "./Footer";
 import Select from "react-select";
 import { customStyles } from "./CustomeStyle";
 import { categories } from "./Constants";
@@ -37,8 +36,8 @@ const ProductDetails = ({ name }: any) => {
 
   const sortByOptions = [
     { value: "default", label: "Newly Listed" },
-    { value: "name", label: "Name" },
-    { value: "date", label: "Date" },
+    { value: 'name', label: 'Newly Name' },
+    { value: 'date', label: 'Newly Date' },
   ];
 
   const handleSortByChange = (value: any) => {
@@ -122,7 +121,7 @@ const ProductDetails = ({ name }: any) => {
               <div className="w-full flex justify-center items-end sm:flex-row sm:items-center sm:justify-end">
                 <div className="mb-2 sm:mb-0">
                   <div className="hidden md:flex items-center justify-between">
-                    <div className="flex items-center space-x-2 py-3">
+                    <div className="flex items-center space-x-4 py-3">
                       <div className="text-md font-bold">View</div>
                       <div>
                         <Image
@@ -151,9 +150,9 @@ const ProductDetails = ({ name }: any) => {
                   <div className="relative inline-block text-left">
                     <div className="flex">
                       <div className="text-black-900 font-bold mr-2 mt-2 sm:mt-2">
-                        Sort by :
+                        Sort by <span className='ml-3'>:</span>
                       </div>
-                      <div>
+                      <div className='w-[170px]'>
                         <Select
                           value={sortByOptions.find(
                             (option) => option.value === sortBy
@@ -221,7 +220,7 @@ const ProductDetails = ({ name }: any) => {
         </div>
       </div>
       <ScrapApp />
-      <Footer />
+
     </>
   );
 };

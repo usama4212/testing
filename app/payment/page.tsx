@@ -1,29 +1,23 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import ScrapSell from '@/components/ScrapSell';
-import ScrapApp from '@/components/ScrapApp';
-import Footer from '@/components/Footer';
-import Payment from '@/components/Payment'; 
-import PaymentCard from '@/components/PaymentCard'; 
+import newbg from "@/assets/new-BG.svg";
+import Payment from '@/components/Payment';
+import PaymentCard from '@/components/PaymentCard';
 
 const PaymentMethad = () => {
     const [isPaymentCard, setIsPaymentCard] = useState(false)
+    const [isCreditCardShow, setIsCreditCardShow] = useState(false)
 
-    useEffect(() => {
-      console.log("isPaymentCard", isPaymentCard);
-      
-    }, [isPaymentCard])
     return (
         <>
-            <div className='bg-[#e9e9e9]'>
-                {isPaymentCard ? <PaymentCard /> : <Payment setIsPaymentCard={setIsPaymentCard}/>}
-                <ScrapSell />
-                <ScrapApp />
-                <Footer />
+            <div className='bg-cover' style={{ backgroundImage: `url(${newbg.src})` }}>
+                {(isPaymentCard && !isCreditCardShow) ?
+                    <PaymentCard setIsCreditCardShow={setIsCreditCardShow} />
+                    :
+                    <Payment setIsPaymentCard={setIsPaymentCard} isCreditCardShow={isCreditCardShow} setIsCreditCardShow={setIsCreditCardShow} />}
             </div>
         </>
     );
 };
 
 export default PaymentMethad;
-
