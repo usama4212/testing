@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-export default function CategoryDropdown({ showCategoryDropdown, setShowCategoryDropdown, setShowPriceDropdown }: any) {
+export default function CategoryDropdown({ showCategoryDropdown, setShowCategoryDropdown, setShowPriceDropdown , selectedOption , setSelecetedOption }: any) {
   const [slectedCategory, setSelecetedCategory] = useState("");
-  const [selectedOption, setSelecetedOption] = useState("Categories");
+  // const [selectedOption, setSelecetedOption] = useState("Categories");
   const categories = [
     {
       name: "Electronics",

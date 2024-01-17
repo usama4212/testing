@@ -135,11 +135,12 @@ export default function Navbar2() {
                 </>
               ) : (
                 <>
-                  <button
-                    className="text-black hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-md  py-2 text-base font-medium"
-                    onClick={() => { setIsLogin(true); }}                  >
+                  <Link
+                    href="/login"
+                    className="text-black text-center hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-md  py-2 text-base font-medium"
+                  >
                     Login
-                  </button>
+                  </Link>
                 </>
               )}
             </div>

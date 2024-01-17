@@ -1,5 +1,4 @@
 "use client";
-/* eslint-disable react/no-unescaped-entities */
 import React, { useEffect, useState } from "react";
 import CategoriesDropDown from "../UI/CategoriesDropdown";
 import PriceRangeDropdown from "../UI/PriceRangeDropdown";
@@ -7,8 +6,20 @@ import PriceRangeDropdown from "../UI/PriceRangeDropdown";
 export default function SubHeader() {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
   const [showPriceDropdown, setShowPriceDropdown] = useState(false);
-  const [slectedCategory, setSelecetedCategory] = useState("Categories");
-  const [slectedPrice, setSelecetedPrice] = useState("Price Range");
+  const [search, setSearch] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState("Categories");
+  const [selectedPrice, setSelecetedPrice] = useState("Price Range");
+
+  const searchHandler = () => {
+
+    const searchQuery = {
+      search,
+      selectedCategory,
+      selectedPrice
+    }
+
+  }
+
   useEffect(() => {
     const handleClickOutside = (event: any) => {
       const targetDiv = document.getElementById("dropDownDiv");
@@ -43,6 +54,10 @@ export default function SubHeader() {
               <input
                 type="text" id="simple-search" className="  text-gray-900 text-sm  border-b   block w-[100%]  ps-10 py-2.5  bg-white outline-none focus:outline-none "
                 placeholder="Search for auctions..." required
+                value={search}
+                onChange={(e) => {
+                  setSearch(e.target.value)
+                }}
               />
             </div>
             <div className="hidden md:flex" id="dropDownDiv">
@@ -50,15 +65,21 @@ export default function SubHeader() {
                 showCategoryDropdown={showCategoryDropdown}
                 setShowCategoryDropdown={setShowCategoryDropdown}
                 setShowPriceDropdown={setShowPriceDropdown}
+                selectedOption={selectedCategory}
+                setSelecetedOption={setSelectedCategory}
               />
               <PriceRangeDropdown
                 showPriceDropdown={showPriceDropdown}
                 setShowPriceDropdown={setShowPriceDropdown}
                 setShowCategoryDropdown={setShowCategoryDropdown}
+                selectedOption={selectedPrice}
+                setSelecetedOption={setSelecetedPrice}
               />
             </div>
             {/* Search Button */}
-            <button type="submit" className=" ml-4  text-black hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-md py-2 text-base font-medium"   >
+            <button type="submit" className=" ml-4  text-black hover:bg-yellow-300 leading-snug w-[118px] border border-black rounded-md py-2 text-base font-medium"
+              onClick={searchHandler}
+            >
               <span className="">Search</span>
             </button>
           </div>

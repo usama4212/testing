@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { onlyNumberRegex } from "../Constants";
 
-export default function PriceRangeDropdown({ showPriceDropdown, setShowPriceDropdown, setShowCategoryDropdown }: any) {
-  // const [showPriceDropdown, setShowPriceDropdown] = useState(false);
+export default function PriceRangeDropdown({ showPriceDropdown, setShowPriceDropdown, setShowCategoryDropdown, selectedOption, setSelecetedOption }: any) {
   const [selectedRange, setSelecetedRange] = useState("");
-  const [slectedOption, setSelecetedOption] = useState("Price Range");
   const [min, setMin] = useState("");
   const [max, setMax] = useState("");
   const prices = [
@@ -48,7 +46,7 @@ export default function PriceRangeDropdown({ showPriceDropdown, setShowPriceDrop
             setShowPriceDropdown(!showPriceDropdown);
           }}
         >
-          {slectedOption}
+          {selectedOption}
           <svg className={`mx-1 w-4 h-4 inline ${showPriceDropdown ? "" : "rotate-180"} transition duration-500 absolute right-2 top-1/2 transform -translate-y-1/2`}
             viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" >
             <path d="M15 13L10 8L5 13" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />

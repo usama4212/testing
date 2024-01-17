@@ -27,7 +27,7 @@ export default function Card({ cardImage, scrapTitle, classname, days, hours, mi
           {/* <span className=" m-2 rounded-md bg-purple-600 px-2 text-center text-base font-medium text-white">
             Verified
           </span> */}
-          <div className=" flex items-center bg-primary py-1 px-2 rounded-md w-[175px]">
+          <div className=" flex items-center bg-primary py-1 px-2 rounded-md w-[160px]">
             <Image className="w-[17px]  " src={clock} alt="Card Image" />
             <div className=" ml-1 text-[17px] flex items-center">
               {/* {hours}h {minutes}m {seconds}s */}
