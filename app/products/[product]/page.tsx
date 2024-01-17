@@ -8,18 +8,18 @@ import Modal from "@/components/UI/Modal";
 import React from "react";
 
 export default function SingleProduct({ params }: any) {
-  const product = decodeURIComponent(params.product);
+  const productName = decodeURIComponent(params.product);
   const breadcrumbItems = [
     { label: "Home", href: "/" },
     { label: "Products", href: "/products" },
-    { label: product },
+    { label: productName },
   ];
   return (
     <>
       {" "}
       <div className="max-w-7xl mx-auto">
         <Breadcrumb2 items={breadcrumbItems} />
-        <Single />
+        <Single productTitle={productName} />
 
         <CardsCollection title={"Similar Auctions"} />
         <ScrapSell />

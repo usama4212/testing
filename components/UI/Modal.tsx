@@ -1,7 +1,7 @@
 import Image from "next/image";
-import React, { useState } from "react";
-import cardImage from "@/assets/cardModal.svg";
-export default function Modal({ setShowModal }: any) {
+import React, { Children, useState } from "react";
+import bgimage from "@/assets/modalbg.webp"
+export default function Modal({ setShowModal, children }: any) {
   return (
     <>
       <>
@@ -9,8 +9,8 @@ export default function Modal({ setShowModal }: any) {
           className={`bg-black bg-opacity-40 overflow-y-auto overflow-x-hidden fixed top-96 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full`}
         >
           <div className="relative p-4 w-full max-w-xl max-h-full  ">
-            {/* Modal content */}
-            <div className="relative bg-white rounded-lg shadow dark:bg-gray-700 py-4">
+
+            <div className="relative  rounded-lg shadow dark:bg-gray-700 py-4 w-[540px] bg-cover" style={{ backgroundImage: `url("${bgimage.src}")` }}>
               {/* Modal header */}
               <div className="flex items-center justify-between  pr-5  rounded-t ">
                 <button
@@ -36,27 +36,7 @@ export default function Modal({ setShowModal }: any) {
                   <span className="sr-only">Close modal</span>
                 </button>
               </div>
-              {/* Modal body */}
-              <div className="flex justify-center h-40 mb-8">
-                <Image src={cardImage} alt="card" />
-              </div>
-              <div className="flex justify-center">
-                <span className="font-semibold text-lg">
-                  Payment Method not Added
-                </span>{" "}
-              </div>
-              <div className="flex justify-center mb-4">
-                <span className="">First Add Payment method for</span>{" "}
-              </div>
-              {/* Modal footer */}
-              <div className="flex items-center justify-center p-4 md:p-5  rounded-b dark:border-gray-600">
-                <button
-                  type="button"
-                  className=" bg-primary hover:bg-yellow-400  focus:outline-none  font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
-                  Add Payment Method
-                </button>
-              </div>
+              {children}
             </div>
           </div>
         </div>

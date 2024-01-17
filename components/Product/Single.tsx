@@ -10,37 +10,36 @@ import RatingStars from "../UI/Rating";
 import Slider from "react-slick";
 import "./CustomSlider.css";
 import Modal from "../UI/Modal";
+import cardImage from "@/assets/cardModal.svg";
+import pic1 from "@/assets/category-card-1.png"
+import pic2 from "@/assets/category-card-2.png"
+import pic3 from "@/assets/category-card-3.png"
+import pic4 from "@/assets/category-card-4.png"
+import pic5 from "@/assets/category-card-5.png"
+import CountdownTimer from "../Auction/CountdownTimer";
 
-export default function Single() {
+
+export default function Single({ productTitle }: any) {
   const slider1 = useRef<Slider>(null!);
   const slider2 = useRef<Slider>(null!);
   const [showModal, setShowModal] = useState(false);
   const singleProduct = {
-    title: "Apple iPhone 14 Pro - 128GB - Gold (Unlocked)",
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore Ipsum has been the industry's standard dummy text ever since the 1500s, More info",
+    title: productTitle + "",
+    description: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lore Ipsum has been the industry's standard dummy text ever since the 1500s, More info",
     condition: "used",
     expAt: "12/07/2024",
     basePrice: "1200",
     sellerName: "John Doe",
     rating: 3.5,
     reveiws: 39,
-    productImages: [
-      profile,
-      singleImage,
-      singleImage,
-      singleImage,
-      singleImage,
-    ],
+    productImages: [pic1, pic2, pic3, pic4, pic5,],
   };
 
   var settings = {
     dots: false,
-
     dotsClass: "slick-dots slick-thumb",
     speed: 500,
     slidesToShow: 1,
-
     slidesToScroll: 1,
   };
 
@@ -69,7 +68,7 @@ export default function Single() {
               focusOnSelect={true}
               centerMode={true}
               centerPadding="80px"
-              className="px-5 "
+              className="p-5 "
               beforeChange={(index, nextIndex) => {
                 slider2.current.slickGoTo(nextIndex);
                 slider1.current.slickGoTo(nextIndex);
@@ -77,12 +76,7 @@ export default function Single() {
             >
               {singleProduct.productImages.map((image, index) => {
                 return (
-                  <Image
-                    key={index}
-                    src={image}
-                    alt="image"
-                    className="h-[92px] px-2 "
-                  />
+                  <Image key={index} src={image} alt="image" className="h-[92px] px-2 py-2 " />
                 );
               })}
             </Slider>
@@ -100,20 +94,14 @@ export default function Single() {
                 fade={true}
                 nextArrow={
                   <>
-                    <button
-                      className=" my-auto absolute  top-1/2 -right-28 transform -translate-y-1/2"
-                      onClick={handleNext}
-                    >
+                    <button className=" my-auto absolute  top-1/2 -right-28 transform -translate-y-1/2" onClick={handleNext}    >
                       <Image src={next} alt="next" />
                     </button>
                   </>
                 }
                 prevArrow={
                   <>
-                    <button
-                      className=" my-auto absolute top-[45%] -left-[120px]  transform -translate-y-1/2"
-                      onClick={handlePrev}
-                    >
+                    <button className=" my-auto absolute top-[45%] -left-[120px]  transform -translate-y-1/2" onClick={handlePrev}   >
                       <Image src={next} alt="next" className="rotate-180" />
                     </button>
                   </>
@@ -130,7 +118,7 @@ export default function Single() {
         </div>
         {/* Product details section */}
         <div className="grid col-span-1 min-h-[540px]  md:ps-5 py-1 space-y-[15px]">
-          <div className="text-zinc-900 text-[21.83px] font-semibold">
+          <div className="text-zinc-900 text-[21.83px] font-semibold h-16 py-2 ">
             {singleProduct.title}
           </div>
           <div>{singleProduct.description}</div>
@@ -145,33 +133,16 @@ export default function Single() {
               </div>
               <div className="flex items-center justify-center space-x-1 ">
                 {" "}
-                <svg
-                  width="18"
-                  height="19"
-                  viewBox="0 0 18 19"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
+               
+                <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg"  >
                   <g id="clock">
-                    <path
-                      id="Vector"
-                      d="M9 17C13.1421 17 16.5 13.6421 16.5 9.5C16.5 5.35786 13.1421 2 9 2C4.85786 2 1.5 5.35786 1.5 9.5C1.5 13.6421 4.85786 17 9 17Z"
-                      stroke="black"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                    <path
-                      id="Vector_2"
-                      d="M9 5V9.5L12 11"
-                      stroke="black"
-                      strokeWidth="1.5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
+                    <path id="Vector" d="M9 17C13.1421 17 16.5 13.6421 16.5 9.5C16.5 5.35786 13.1421 2 9 2C4.85786 2 1.5 5.35786 1.5 9.5C1.5 13.6421 4.85786 17 9 17Z"
+                      stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path id="Vector_2" d="M9 5V9.5L12 11" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </g>
                 </svg>
-                <span className="font-semibold ">04h 25m 10s </span>
+                <span className="w-[130px]"><CountdownTimer initialTime={1286400} /></span>
+                {/* <span className="font-semibold ">04h 25m 10s </span> */}
               </div>
               <div></div>
             </div>
@@ -195,26 +166,41 @@ export default function Single() {
                 <span className="text-gray-500 text-sm">
                   ({singleProduct.reveiws})
                 </span>
-
                 <RatingStars rating={3.4} />
               </div>
             </div>
           </div>
           <div className="rounded-[10px] border border-neutral-500 justify-center bg-white items-center inline-flex py-4">
-            <input
-              type="text"
-              placeholder="0000"
-              className="  text-center focus:outline-none "
-            />
+            <input type="text" placeholder="0000" className="  text-center focus:outline-none " />
           </div>
           <div className=" justify-start  inline-flex">
-            <button className="bg-primary rounded-[10px]  w-full py-4 text-base leading-tight " onClick={()=>{setShowModal(true)}}>
+            <button className="bg-primary rounded-[10px]  w-full py-4 text-base leading-tight " onClick={() => { setShowModal(true) }}>
               Bid
             </button>
           </div>
         </div>
       </div>
-      {showModal && <Modal setShowModal={setShowModal} />}
+      {showModal && <Modal setShowModal={setShowModal} >
+        <div className="flex justify-center h-40 mb-8">
+          <Image src={cardImage} alt="card" />
+        </div>
+        <div className="flex justify-center">
+          <span className="font-semibold text-lg">
+            Payment Method not Added
+          </span>{" "}
+        </div>
+        <div className="flex justify-center mb-4">
+          <span className="">First Add Payment method for</span>{" "}
+        </div>
+
+        <div className="flex items-center justify-center p-4 md:p-5  rounded-b dark:border-gray-600">
+          <button
+            type="button"
+            className=" bg-primary hover:bg-yellow-400  focus:outline-none  font-medium rounded-lg text-base px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          >
+            Add Payment Method
+          </button>
+        </div></Modal>}
     </>
   );
 }

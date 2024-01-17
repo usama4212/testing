@@ -21,12 +21,7 @@ import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
 import { useRouter } from "next/navigation";
 
-import {
-  emailRegex,
-  phoneNumberRegex,
-  saudiPhoneNumberRegex,
-} from "@/components/Constants";
-
+import { emailRegex, phoneNumberRegex, saudiPhoneNumberRegex, } from "@/components/Constants";
 
 const LoginPage = () => {
   const [loginOption, setLoginOption] = useState("phone");
@@ -37,13 +32,11 @@ const LoginPage = () => {
   const [phone, setPhone] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [phoneError, setPhoneError] = useState("");
-
   const [inputsError, setInputsError] = useState({
     email: "",
     password: "",
   });
   const router = useRouter();
-
   const setValue = (e: any) => {
     const { value, name } = e.target;
     if (name === "phone") {
@@ -136,18 +129,7 @@ const LoginPage = () => {
                 <div className="text-base w-[174.26px] leading-normal font-normal">
                   With Phone Number
                 </div>
-
-                <PhoneInput
-                  DefaultImage={phoneImage}
-                  activeImage={activePhone}
-                  type="text"
-                  value={phone}
-                  name="phone"
-                  placeholder="+9661233453"
-                  onChange={setValue}
-                  error={phoneError}
-                />
-
+                <PhoneInput DefaultImage={phoneImage} activeImage={activePhone} type="text" value={phone} name="phone" placeholder="+9661233453" onChange={setValue} error={phoneError} />
                 <span className="text-red-500 text-xs px-2  ">
                   {phoneError}
                 </span>
@@ -156,30 +138,15 @@ const LoginPage = () => {
             {loginOption == "email" && (
               <div className="space-y-3">
                 <div className="pb-2">
-                  <Input
-                    DefaultImage={emailIcon2}
-                    activeImage={activeEmail}
-                    type="text"
-                    name="email"
-                    value={inputs.email}
-                    placeholder="Email address"
-                    onChange={setValue}
-                    fieldData={inputsError.email}
-                  />
+                  <Input DefaultImage={emailIcon2} activeImage={activeEmail} type="text" name="email" value={inputs.email} placeholder="Email address" onChange={setValue} fieldData={inputsError.email} />
                   <span className="text-red-500 text-xs px-2  float-left  ">
                     {inputsError.email}
                   </span>
                 </div>
                 <div className="">
                   <Input
-                    DefaultImage={passwordIcon}
-                    activeImage={activePassword}
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    value={inputs.password}
-                    placeholder="Password"
-                    onChange={setValue}
-                    icon={showPassword ? eye : eyeOff}
+                    DefaultImage={passwordIcon} activeImage={activePassword} type={showPassword ? "text" : "password"}
+                    name="password" value={inputs.password} placeholder="Password" onChange={setValue} icon={showPassword ? eye : eyeOff}
                     onClick={() => {
                       setShowPassword(!showPassword);
                     }}
@@ -190,10 +157,7 @@ const LoginPage = () => {
                   </span>
                 </div>
                 <div className="">
-                  <Link
-                    href="/forget"
-                    className="text-slate-950 text-xs font-medium leading-tight float-right hover:text-primary"
-                  >
+                  <Link href="/forget" className="text-slate-950 text-xs font-medium leading-tight float-right hover:text-primary" >
                     Forget Password?
                   </Link>
                   <br />
@@ -210,46 +174,30 @@ const LoginPage = () => {
 
             {loginOption == "phone" && (
               <div className="space-y-3">
-                <Button
-                  buttonText="Continue with Gmail"
-                  icon={gmailIcon}
-                  clickHandler={(e) => {
-                    e.preventDefault();
-                    loginWithGoogle();
-                  }}
-                  style={{}}
+                <Button buttonText="Continue with Gmail" icon={gmailIcon} clickHandler={(e) => {
+                  e.preventDefault();
+                  loginWithGoogle();
+                }}
                 />
                 {/* Continue with Apple */}
-                <Button
-                  buttonText="Continue with Apple"
-                  icon={appleIcon}
-                  clickHandler={(e) => {
-                    e.preventDefault();
-                  }}
-                  style={{}}
+                <Button buttonText="Continue with Apple" icon={appleIcon} clickHandler={(e) => {
+                  e.preventDefault();
+                }}
                 />
                 {/* Continue with Email or Phone */}
 
-                <Button
-                  buttonText="Sign in with Email"
-                  icon={emailIcon}
-                  clickHandler={(e) => {
-                    e.preventDefault();
-                    setLoginOption("email");
-                  }}
-                  style={{}}
+                <Button buttonText="Sign in with Email" icon={emailIcon} clickHandler={(e) => {
+                  e.preventDefault();
+                  setLoginOption("email");
+                }}
                 />
               </div>
             )}
             {loginOption == "email" && (
-              <Button
-                buttonText="Sign in with Phone"
-                icon={phoneImage}
-                clickHandler={(e) => {
-                  e.preventDefault();
-                  setLoginOption("phone");
-                }}
-                style={{}}
+              <Button buttonText="Sign in with Phone" icon={phoneImage} clickHandler={(e) => {
+                e.preventDefault();
+                setLoginOption("phone");
+              }}
               />
             )}
           </div>

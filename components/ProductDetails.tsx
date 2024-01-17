@@ -64,7 +64,7 @@ const ProductDetails = ({ name }: any) => {
 
   return (
     <>
-      <div className="mx-4 md:mx-8 lg:mx-16">
+      <div className="mx-auto max-w-7xl">
         <div className="container mx-auto flex flex-col md:flex-row lg:flex-row">
           <div className="w-full md:w-1/4 lg:w-1/4">
             <div className="text-black text-lg sm:text-4xl font-extrabold mb-5 mt-8 ml-4">
@@ -183,6 +183,7 @@ const ProductDetails = ({ name }: any) => {
                   key={index}
                   view={view}
                   index={index}
+                  expTime={86000}
                   description={
                     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."
                   }
@@ -195,25 +196,37 @@ const ProductDetails = ({ name }: any) => {
                 Load More
               </button>
             </div>
-            <div className="text-black text-lg sm:text-lg mt-3">
+            <div className="text-black text-lg px-5 sm:px-0 sm:text-lg mt-3">
               Recently Viewed
             </div>
             <div className="border-b border-black w-full mb-2"></div>
-            <div className="flex">
+            <div className="flex flex-wrap">
               <Card
                 cardImage={laptop}
                 scrapTitle={"Electric Heater"}
                 classname={"1/3"}
+                days="5"
+                hours="5"
+                minutes="5"
+                seconds="5"
               />
               <Card
                 cardImage={laptop}
                 scrapTitle={"IPhone 14"}
                 classname={"1/3"}
+                days="5"
+                hours="5"
+                minutes="5"
+                seconds="5"
               />
               <Card
                 cardImage={laptop}
                 scrapTitle={"Air Conditionar"}
                 classname={"1/3"}
+                days="5"
+                hours="5"
+                minutes="5"
+                seconds="5"
               />
             </div>
           </div>

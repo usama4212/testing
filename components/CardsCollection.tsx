@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import arrow from "@/assets/arrow.svg";
 import cardPic from "@/assets/laptop.jpeg";
+import cardPic1 from "@/assets/category-card-1.png";
 import moment from 'moment/moment';
 
 
@@ -68,7 +69,7 @@ const CardsCollection = ({ title }: any) => {
                 hours={hours}
                 minutes={minutes}
                 seconds={seconds}/>
-              <Card cardImage={cardPic}
+              <Card cardImage={cardPic1}
                 scrapTitle={"Toyota Hilux 2018"}  days={days}
                 hours={hours}
                 minutes={minutes}

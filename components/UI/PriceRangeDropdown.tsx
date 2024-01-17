@@ -1,90 +1,63 @@
 import React, { useState } from "react";
 import { onlyNumberRegex } from "../Constants";
 
-export default function PriceRangeDropdown({showPriceDropdown, setShowPriceDropdown , setShowCategoryDropdown}: any) {
+export default function PriceRangeDropdown({ showPriceDropdown, setShowPriceDropdown, setShowCategoryDropdown }: any) {
   // const [showPriceDropdown, setShowPriceDropdown] = useState(false);
   const [selectedRange, setSelecetedRange] = useState("");
   const [slectedOption, setSelecetedOption] = useState("Price Range");
   const [min, setMin] = useState("");
   const [max, setMax] = useState("");
-  const [rotate, setRotate] = useState(false);
   const prices = [
     {
-      name: "0 to 500",
-      subcategory: [],
+      priceRange: "0 to 500",
     },
     {
-      name: "500 to 1000",
-      subcategory: [],
+      priceRange: "500 to 1000",
     },
     {
-      name: "1000 to 1500",
-      subcategory: [],
+      priceRange: "1000 to 1500",
     },
     {
-      name: "1500 to 2000",
-      subcategory: [],
+      priceRange: "1500 to 2000",
     },
     {
-      name: "2000 to 2500",
-      subcategory: [],
+      priceRange: "2000 to 2500",
     },
     {
-      name: "2500 to 3000",
-      subcategory: [],
+      priceRange: "2500 to 3000",
     },
     {
-      name: "3000 to 3500",
-      subcategory: [],
+      priceRange: "3000 to 3500",
     },
     {
-      name: "3500 to 4000",
-      subcategory: [],
+      priceRange: "3500 to 4000",
     },
     {
-      name: "4000 to 5000",
-      subcategory: [],
+      priceRange: "4000 to 5000",
     },
   ];
   return (
     <>
       <div className="dropdown inline-block relative ">
         <button
-          type="button"
+          type="button" className="w-[200px]  border-l-2 py-1 relative"
           onClick={() => {
-            if(!showPriceDropdown){
+            if (!showPriceDropdown) {
               setShowCategoryDropdown(false)
             }
             setShowPriceDropdown(!showPriceDropdown);
           }}
-          className="w-[200px]  border-l-2 py-1 relative"
         >
           {slectedOption}
-          <svg
-            className={`mx-1 w-4 h-4 inline ${
-              showPriceDropdown ? "" : "rotate-180"
-            } transition duration-500 absolute right-2 top-1/2 transform -translate-y-1/2`}
-            viewBox="0 0 20 21"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              d="M15 13L10 8L5 13"
-              stroke="black"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
+          <svg className={`mx-1 w-4 h-4 inline ${showPriceDropdown ? "" : "rotate-180"} transition duration-500 absolute right-2 top-1/2 transform -translate-y-1/2`}
+            viewBox="0 0 20 21" fill="none" xmlns="http://www.w3.org/2000/svg" >
+            <path d="M15 13L10 8L5 13" stroke="black" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
         {showPriceDropdown && (
           <ul className="dropdown-content absolute bg-white text-gray-900 border pt-1 w-52">
             <li className="px-4 py-2 flex space-x-2">
-              <input
-                type="text"
-                placeholder="Min"
-                className="  px-2 w-16 border"
-                value={min}
+              <input type="text" placeholder="Min" className="  px-2 w-16 border" value={min}
                 onChange={(e) => {
                   const { value } = e.target;
                   if (onlyNumberRegex.test(value) && value.length > 0) {
@@ -116,27 +89,23 @@ export default function PriceRangeDropdown({showPriceDropdown, setShowPriceDropd
                 }}
               />
             </li>
-
-            {prices.map((category, index) => {
+            {prices.map((value, index) => {
               return (
-                <li
-                  key={index}
-                  className="dropdown"
+                <li key={index} className="dropdown"
                   onMouseEnter={() => {
-                    setSelecetedRange(category.name);
+                    setSelecetedRange(value.priceRange);
                   }}
                   onMouseLeave={() => {
                     setSelecetedRange("");
                   }}
                 >
-                  <span
-                    className=" hover:bg-gray-200  cursor-pointer py-2 px-4 block whitespace-no-wrap"
+                  <span className=" hover:bg-gray-200  cursor-pointer py-2 px-4 block whitespace-no-wrap"
                     onClick={() => {
-                      setSelecetedOption(category.name);
+                      setSelecetedOption(value.priceRange);
                       setShowPriceDropdown(!showPriceDropdown);
                     }}
                   >
-                    {category.name}
+                    {value.priceRange}
                   </span>
                 </li>
               );

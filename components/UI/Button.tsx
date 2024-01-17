@@ -21,7 +21,7 @@ const Button = ({ icon, clickHandler, buttonText , style}: ButtonProps) => {
 
 interface ButtonProps {
   icon: StaticImageData;
-  style:object;
+  style?:object;
   clickHandler: (e:any) => void;
   buttonText: string;
 }
