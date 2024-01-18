@@ -15,7 +15,6 @@ import passwordIcon from "@/assets/defaultPassword.svg";
 import Button from "@/components/UI/Button";
 import Input from "@/components/UI/FieldInput";
 import Link from "next/link";
-import { useGoogleLogin } from "@react-oauth/google";
 import eye from "@/assets/eye.svg";
 import eyeOff from "@/assets/eye-slash.svg";
 import PhoneInput from "@/components/UI/PhoneInput";
@@ -56,9 +55,7 @@ const LoginPage = () => {
     }
   };
 
-  const loginWithGoogle = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
-  });
+
 
   const submitHandler = () => {
     if (loginOption == "phone") {
@@ -176,7 +173,7 @@ const LoginPage = () => {
               <div className="space-y-3">
                 <Button buttonText="Continue with Gmail" icon={gmailIcon} clickHandler={(e) => {
                   e.preventDefault();
-                  loginWithGoogle();
+
                 }}
                 />
                 {/* Continue with Apple */}
